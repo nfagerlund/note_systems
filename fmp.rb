@@ -1,5 +1,6 @@
-#!/usr/bin/ruby
-# fmp.rb version 1.3
+#!/usr/bin/env ruby
+# fmp.rb version 1.5
+# Changelog for 1.5 (October 2012): Handle directories containing ~.
 # (c) 2006 Nick Fagerlund; available under the GNU General Public License
 # http://www.gnu.org/copyleft/gpl.html
 #
@@ -32,9 +33,13 @@
 # in them. The only allowed characters are alphanumerics, -, ., and _.
 
 fiendTwigs = ''
-$fiendDir = ENV["HOME"] + "/Lists"
-fiendFile = "fiend.txt"
-fiendPath = $fiendDir + "/" + fiendFile
+
+default_fmp_root = ENV["HOME"] + "/Lists"
+$fiendDir = File.expand_path( ENV["FMPROOT"] || default_fmp_root )
+default_fmp_file = $fiendDir + "/fiend.txt"
+fiendPath = File.expand_path( ENV["FMPFILE"] || default_fmp_file )
+fiendFile = fiendPath.split('/')[-1].sub(/\.[^\.]+$/, '')
+
 
 Dir.mkdir($fiendDir) unless File.exists?($fiendDir)
 
@@ -83,7 +88,7 @@ File.readlines(fiendPath).each { |line|
 	when /^#/, "", /^;/, /^\/\//
 		fiendTwigs << line + "\n"
 		# David assures me that this is worth doing. 
-	when "\^fiend"
+	when "\^#{fiendFile}"
 		fiendTwigs << entry + "\n"
 		# I think I had a bad dream about THIS bit of perverse input.
 	when /^\^([\w.\-]+)$/
