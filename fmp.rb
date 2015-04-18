@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-# fmp.rb version 1.1
+# fmp.rb version 1.2
 # (c) 2006 Nick Fagerlund; available under the GNU General Public License
 # http://www.gnu.org/copyleft/gpl.html
 # Implements the Fiendish Master Plan capture-sorting system, which
@@ -26,11 +26,7 @@
 
 # Caveats and gotchas: 
 # 1. File names used in start-of-line caret tags can't have any spaces
-# in them. Any other filesystem-legal character ought to be fine.
-# You're in charge of figuring out what's filesystem-legal around your
-# system, and I'm not sure yet what happens when it's fed something
-# perverse. Probably something pretty hilarious, especially if you use 
-# a pipe or something.
+# in them. The only allowed characters are alphanumerics, -, ., and _.
 # 2. Ruby wants nice, clean Unix line breaks, and will boff up the
 # formatting if it doesn't find them. When I first used this on a copy
 # of my notes files, they had lived on three different operating
@@ -44,8 +40,8 @@ File.readlines("#{File.expand_path("~/Lists/fiend.txt")}").each do |theLine|
 	if theLine =~ /^\^[Ff][Ii][Ee][Nn][Dd] /
 		fiendTwigs << theLine.sub(/^\^[\S]+ /, '')
 		# I think I had a bad dream about THIS bit of perverse input.
-	elsif theLine =~ /^\^[\S]+ /
-		File.open("#{File.expand_path("~/Lists/#{theLine.split(' ', 2)[0].sub(/\^/, '').chomp}.txt")}", "a") { |leafPile| leafPile.puts(theLine.sub(/^\^[\S]+ /, '')) }
+	elsif theLine =~ /^\^[A-Za-z\d_.\-]+ /
+		File.open("#{File.expand_path("~/Lists/#{theLine.split(' ', 2)[0].sub(/\^/, '').chomp}.txt")}", "a") { |leafPile| leafPile.puts(theLine.sub(/^\^[A-Za-z\d_.\-]+ /, '')) }
 	else
 		fiendTwigs << theLine
 	end
