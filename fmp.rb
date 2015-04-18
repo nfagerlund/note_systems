@@ -18,14 +18,10 @@ File.readlines("/Users/nick/Lists/fiend.txt").each do |theLine|
 	if theLine =~ /^\^[Ff][Ii][Ee][Nn][Dd] /
 		fiendTwigs << theLine.sub(/^\^[\S]+ /, '')
 	elsif theLine =~ /^\^[\S]+ /
-		File.open("/Users/nick/Lists/#{theLine.split(' ', 2)[0].sub(/\^/, '').chomp}.txt", "a") do |leafPile|
-			leafPile.puts(theLine.sub(/^\^[\S]+ /, ''))
-		end
+		File.open("/Users/nick/Lists/#{theLine.split(' ', 2)[0].sub(/\^/, '').chomp}.txt", "a") { |leafPile| leafPile.puts(theLine.sub(/^\^[\S]+ /, '')) }
 	else
 		fiendTwigs << theLine
 	end
 end
 
-File.open("/Users/nick/Lists/fiend.txt", "w") do |fiendMain|
-	fiendMain.puts(fiendTwigs)
-end
+File.open("/Users/nick/Lists/fiend.txt", "w") { |fiendMain| fiendMain.puts(fiendTwigs) }
