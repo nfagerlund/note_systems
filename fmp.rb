@@ -6,6 +6,8 @@
 # is really not so complicated that it deserves its own name, but is
 # called so anyway for Historical Reasons.
 
+# THIS PROGRAM NEEDS TO BE ALTERED BEFORE YOU USE IT. Change all the paths as appropriate. For some reason, I couldn't get Ruby to expand paths properly on the Mac, so I had to hardcode it to my home directory instead of doing the right thing and pointing it at ~/Lists. Also, you may not be swayed by the precedent of Historical Reasons, and will thus want to have your main note file be called something other than "fiend.txt."
+
 # Use case: You have one file that's almost always open for catching notes as you think of them. When you have a note that belongs in a separate file, you put it on one line that begins with the sequence ^nameoffile. When you run fmp.rb to sort the main file, it puts any lines starting with ^variousfilenames at the end of their appropriate files. The beauty of this system is that it does the right thing even if ^thatfile doesn't exist yet, so you can create new collections of notes at whim without having to do anything different. 
 
 # Caveats and gotchas:
