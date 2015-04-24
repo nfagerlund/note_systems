@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-# fmp.rb version 1.5
-# Changelog for 1.5 (October 2012): Handle directories containing ~.
 # (c) 2006 Nick Fagerlund; available under the GNU General Public License
 # http://www.gnu.org/copyleft/gpl.html
 #
@@ -32,81 +30,79 @@
 # 1. File names used in start-of-line caret tags can't have any spaces
 # in them. The only allowed characters are alphanumerics, -, ., and _.
 
+require 'pathname'
+
 fiendTwigs = ''
 
-default_fmp_root = ENV["HOME"] + "/Lists"
-$fiendDir = File.expand_path( ENV["FMPROOT"] || default_fmp_root )
-default_fmp_file = $fiendDir + "/fiend.txt"
-fiendPath = File.expand_path( ENV["FMPFILE"] || default_fmp_file )
-fiendFile = fiendPath.split('/')[-1].sub(/\.[^\.]+$/, '')
+$fiendDir = Pathname.new( ENV["FMPROOT"] || "~/Lists" ).expand_path
+fiendPath = Pathname.new( ENV["FMPFILE"] || $fiendDir + "fiend.txt" ).expand_path
+fiendFile = fiendPath.basename(".*")
 
 
-Dir.mkdir($fiendDir) unless File.exists?($fiendDir)
+$fiendDir.mkdir unless $fiendDir.exist?
 
-fstat = File.stat($fiendDir)
-unless fstat.directory?
-	print "Not a directory: #{$fiendDir}\n"
-	exit 1
+unless $fiendDir.directory?
+  print "Not a directory: #{$fiendDir}\n"
+  exit 1
 end
 
-unless (File.exists?(fiendPath))
-	print "File does not exist: #{fiendPath}\n"
-	exit 1
+unless fiendPath.exist?
+  print "File does not exist: #{fiendPath}\n"
+  exit 1
 end
 
 class Category
-	def initialize(name)
-		@pathname = $fiendDir + "/" + name + ".txt"
-		@entries = []
-	end
+  def initialize(name)
+    @pathname = $fiendDir + "#{name}.txt"
+    @entries = []
+  end
 
-	def entries(entry)
-		@entries << entry
-	end
+  def entries(entry)
+    @entries << entry
+  end
 
-	def write()
-		File.open(@pathname, "a") { |leafFile|
-			leafFile.puts(@entries.join("\n"))
-		}
-#		print "\n", @pathname, "\n", @entries.join("\n"), "\n"
-	end
+  def write()
+    @pathname.open("a") { |leafFile|
+      leafFile.puts(@entries.join("\n"))
+    }
+  end
 end
 
 leaves = Hash.new
 
-File.readlines(fiendPath).each { |line|
-	line.chomp!
-	tag = ""
-	entry = ""
+fiendPath.readlines(:encoding => 'utf-8').each { |line|
+  line.chomp!
+  tag = ""
+  entry = ""
 
-	if ((line =~ /^(\^[\S]+) (.*)$/) != nil)
-		tag = $1.downcase
-		entry = $2
-	end
+  if ((line =~ /^(\^[\S]+) (.*)$/) != nil)
+    tag = $1.downcase
+    entry = $2
+  end
 
-	case tag
-	when /^#/, "", /^;/, /^\/\//
-		fiendTwigs << line + "\n"
-		# David assures me that this is worth doing. 
-	when "\^#{fiendFile}"
-		fiendTwigs << entry + "\n"
-		# I think I had a bad dream about THIS bit of perverse input.
-	when /^\^([\w.\-]+)$/
+  case tag
+  when /^#/, "", /^;/, /^\/\//
+    fiendTwigs << line + "\n"
+    # David assures me that this is worth doing.
+  when "\^#{fiendFile}"
+    fiendTwigs << entry + "\n"
+    # I think I had a bad dream about THIS bit of perverse input.
+  when /^\^([\w.\-]+)$/
 
-		xtag = $1
-		leaves[xtag] = Category.new(xtag) unless leaves.member?(xtag)
-		leaves[xtag].entries(entry)
-	else
-		fiendTwigs << line + "\n"
-	end
+    xtag = $1
+    leaves[xtag] = Category.new(xtag) unless leaves.member?(xtag)
+    leaves[xtag].entries(entry)
+  else
+    fiendTwigs << line + "\n"
+  end
 }
 
 # Rewrite fiend file...
-File.open(fiendPath, "w") { |f|
-	f.puts(fiendTwigs)
+fiendPath.open("w") { |f|
+  f.puts(fiendTwigs)
 }
 
 # Append to leaf files...
 leaves.each { |key, val|
-	leaves[key].write
+  val.write
 }
