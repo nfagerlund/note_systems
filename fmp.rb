@@ -90,7 +90,7 @@ fiendPath.readlines(:encoding => 'utf-8').each { |line|
   when /^\^([\w.\-]+)$/
 
     xtag = $1
-    leaves[xtag] = Category.new(xtag) unless leaves.member?(xtag)
+    leaves[xtag] ||= Category.new(xtag)
     leaves[xtag].entries(entry)
   else
     fiendTwigs << line + "\n"
@@ -103,6 +103,6 @@ fiendPath.open("w") { |f|
 }
 
 # Append to leaf files...
-leaves.each { |key, val|
-  val.write
+leaves.values.each { |category|
+  category.write
 }
