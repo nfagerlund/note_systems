@@ -1,108 +1,58 @@
 #!/usr/bin/env ruby
-# (c) 2006 Nick Fagerlund; available under the GNU General Public License
+# fmp.rb version 2.0
+# (c) 2006-2019 Nick Fagerlund; available under the GNU General Public License
 # http://www.gnu.org/copyleft/gpl.html
-#
-# Modifications by David Douthitt
-#
-# Implements the Fiendish Master Plan capture-sorting system, which
-# is really not so sophisticated that it deserves its own name, but
-# which has one anyway.
 
-# Use case: ~/Lists/fiend.txt is a text file that I use for catching
-# notes as I think of them. When I have a note that belongs in a
-# separate file, I can put it on one line that begins with the sequence
-# ^nameoffile. When fmp.rb runs, it removes any lines starting with
-# ^variousfilenames and puts them at the end of their appropriate
-# files.
+# Fast Memo Pencil. Fiendish Master Plan. Free Mashed Potatoes.
+# It's a three part system. You need:
+# 1. A fast way to append lines to ~/Lists/fiend.txt.
+# 2. This script (and a fast way to run it), which moves any lines starting with
+# ^caret-tag to ~/Lists/caret-tag.txt. Caret tags can include letters, numbers,
+# underscores (_), and dashes (-).
+# 3. A fast way to open a text file in ~/Lists by name.
 
-# Why I like this:
-# -I can append to any file in my Lists folder, but I only have to keep
-# one file open. By combining this with Quicksilver's append triggers,
-# I've got a pretty powerful note-sorting system.
-# -If ^somefile doesn't exist yet, fmp creates it without any fuss, so I
-# can create new collections of notes at whim without having to do
-# anything different.
-# -I can import any collection of notes into the system simply by
-# dumping the file into ~/Lists and naming it
-# some_filename_sans_spaces.txt.
-
-# Caveats and gotchas:
-# 1. File names used in start-of-line caret tags can't have any spaces
-# in them. The only allowed characters are alphanumerics, -, ., and _.
+# Changes in 2.0 (Feb 2019):
+# - make it not stupidly complicated!
+# - periods aren't allowed in ^caret tags now. I never used this.
+# - changed behavior of env vars, no one's using those anyway and you need to
+#   have those paths scattered across your append and open scripts too, so it's
+#   not like you can just--anyway, I changed their names and the file one is just
+#   a tag name now, and also your main dump file has to be in the same dir as the
+#   other notes files.
 
 require 'pathname'
 
-fiendTwigs = ''
+FMP_DIR = Pathname.new( ENV["FMP_DIR"] || '~/Lists' ).expand_path
+FMP_DUMP_TAG = ENV["FMP_DUMP_TAG"] || 'fiend'
+DUMP_FILE = FMP_DIR + "#{FMP_DUMP_TAG}.txt"
 
-$fiendDir = Pathname.new( ENV["FMPROOT"] || "~/Lists" ).expand_path
-fiendPath = Pathname.new( ENV["FMPFILE"] || $fiendDir + "fiend.txt" ).expand_path
-fiendFile = fiendPath.basename(".*")
-
-
-$fiendDir.mkdir unless $fiendDir.exist?
-
-unless $fiendDir.directory?
-  print "Not a directory: #{$fiendDir}\n"
-  exit 1
+unless FMP_DIR.directory?
+  raise "Not a directory: #{FMP_DIR}"
 end
 
-unless fiendPath.exist?
-  print "File does not exist: #{fiendPath}\n"
-  exit 1
+unless DUMP_FILE.exist?
+  raise "File does not exist: #{DUMP_FILE}"
 end
 
-class Category
-  def initialize(name)
-    @pathname = $fiendDir + "#{name}.txt"
-    @entries = []
-  end
+caretnotes = {}
 
-  def entries(entry)
-    @entries << entry
-  end
-
-  def write()
-    @pathname.open("a") { |leafFile|
-      leafFile.puts(@entries.join("\n"))
-    }
-  end
-end
-
-leaves = Hash.new
-
-fiendPath.readlines(:encoding => 'utf-8').each { |line|
+DUMP_FILE.readlines(encoding: 'utf-8').each { |line|
   line.chomp!
-  tag = ""
-  entry = ""
-
-  if ((line =~ /^(\^[\S]+) (.*)$/) != nil)
-    tag = $1.downcase
-    entry = $2
-  end
-
-  case tag
-  when /^#/, "", /^;/, /^\/\//
-    fiendTwigs << line + "\n"
-    # David assures me that this is worth doing.
-  when "\^#{fiendFile}"
-    fiendTwigs << entry + "\n"
-    # I think I had a bad dream about THIS bit of perverse input.
-  when /^\^([\w.\-]+)$/
-
-    xtag = $1
-    leaves[xtag] ||= Category.new(xtag)
-    leaves[xtag].entries(entry)
+  if /^\^([\w\-]+) (.*)$/.match(line)
+    tag = $1
+    note = $2
+    (caretnotes[tag] ||= []) << note.gsub(%r{ +// +}, "\n")
   else
-    fiendTwigs << line + "\n"
+    (caretnotes[FMP_DUMP_TAG] ||= []) << line.gsub(%r{ +// +}, "\n")
   end
 }
 
-# Rewrite fiend file...
-fiendPath.open("w") { |f|
-  f.puts(fiendTwigs)
-}
+# Waste the dump file (we'll replace it in a sec)
+DUMP_FILE.truncate(0)
 
-# Append to leaf files...
-leaves.values.each { |category|
-  category.write
+# Append to ^caretnote files, including the dump file
+caretnotes.each {|tag, notes|
+  (FMP_DIR + "#{tag}.txt").open('a') {|f|
+    f.puts(notes.join("\n"))
+  }
 }
