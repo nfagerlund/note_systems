@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# fmp.rb version 2.1
+# fmp.rb version 2.2
 # (c) 2006-2019 Nick Fagerlund; available under the GNU General Public License
 # http://www.gnu.org/copyleft/gpl.html
 
@@ -39,7 +39,7 @@ caretnotes = {}
 DUMP_FILE.readlines(encoding: 'utf-8').each { |line|
   line.chomp!
   if /^\^([\w\-]+) (.*)$/.match(line)
-    tag = $1
+    tag = $1.downcase
     note = $2
   else
     tag = FMP_DUMP_TAG
