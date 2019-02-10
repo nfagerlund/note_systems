@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# fmp.rb version 2.0
+# fmp.rb version 2.1
 # (c) 2006-2019 Nick Fagerlund; available under the GNU General Public License
 # http://www.gnu.org/copyleft/gpl.html
 
@@ -41,10 +41,11 @@ DUMP_FILE.readlines(encoding: 'utf-8').each { |line|
   if /^\^([\w\-]+) (.*)$/.match(line)
     tag = $1
     note = $2
-    (caretnotes[tag] ||= []) << note.gsub(%r{ +// +}, "\n")
   else
-    (caretnotes[FMP_DUMP_TAG] ||= []) << line.gsub(%r{ +// +}, "\n")
+    tag = FMP_DUMP_TAG
+    note = line
   end
+  (caretnotes[tag] ||= []) << note.gsub(%r{ +// +}, "\n")
 }
 
 # Waste the dump file (we'll replace it in a sec)
