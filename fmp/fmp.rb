@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 # fmp.rb version 2.2
-# (c) 2006-2019 Nick Fagerlund; available under the GNU General Public License
-# http://www.gnu.org/copyleft/gpl.html
 
 # Fast Memo Pencil. Fiendish Master Plan. Free Mashed Potatoes.
 # It's a three part system. You need:
