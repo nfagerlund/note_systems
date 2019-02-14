@@ -1,0 +1,1 @@
+tell application "LaunchBar" to open "/Users/nick/Lists"
