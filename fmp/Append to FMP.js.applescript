@@ -15,6 +15,7 @@ if (result.buttonReturned == 'Append' || result.buttonReturned == 'Append and op
 }
 
 if (result.buttonReturned == 'Append and open') {
-	Application('BBEdit').activate();
-	Application('BBEdit').open(fiend.js);
+	var bb = Application('BBEdit');
+	bb.activate();
+	bb.open(fiend.js);
 }
