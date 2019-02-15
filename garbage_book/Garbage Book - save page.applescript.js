@@ -1,13 +1,14 @@
 // Wow, even as gross as this is, it's like 0.03x as gross as the AppleScript version
-var slug_length = 25;
-var gbook_dir = $('~/Library/Mobile Documents/com~apple~CloudDocs/Garbage Book').stringByExpandingTildeInPath.js;
-var annoying_characters = /[\\:\/\*\?"<>\|#%\$;\?\n]/g;
+var slugLength = 25;
+var gbookDir = $('~/Library/Mobile Documents/com~apple~CloudDocs/Garbage Book').stringByExpandingTildeInPath.js;
+var annoyingCharacters = /[\\:\/\*\?"<>\|#%\$;\?\n]/g;
+var trailingJunk = /[ _\.]+$/;
 
 var bb = Application('BBEdit');
-var frontDocument = bb.textDocuments[0]
+var frontDocument = bb.textDocuments[0];
 
 var firstLine = frontDocument.text.lines[0].contents();
-var slug = firstLine.substring(0, slug_length).replace(annoying_characters, '_').replace(/[ _\.]+$/, '');
+var slug = firstLine.substring(0, slugLength).replace(annoyingCharacters, '_').replace(trailingJunk, '');
 
 var now = new Date();
 var year = now.getFullYear().toString(); // can't has strftime??
@@ -17,6 +18,6 @@ var hour = now.getHours().toString().padStart(2, '0');
 var minute = now.getMinutes().toString().padStart(2, '0');
 var timestamp = year + '.' + month + '.' + day + ' (' + hour + minute + ')';
 
-var newName = gbook_dir + '/' + timestamp + ' ' + slug + '.txt';
+var newName = gbookDir + '/' + timestamp + ' ' + slug + '.txt';
 
 bb.save(frontDocument, {to: Path(newName)}); // JS scripts get to avoid the whole file/alias/POSIX path chaos and just use Path(/posix-y/path).
