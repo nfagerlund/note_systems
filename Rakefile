@@ -1,19 +1,8 @@
 require 'fileutils'
 require 'rake/clean'
 
-applescripts = [
-  "garbage_book/Garbage Book - save page.scpt",
-  "garbage_book/Garbage Book - Open.scpt",
-  "fmp/FMP - Append.scpt",
-  "fmp/FMP - Open lists folder in LaunchBar.scpt"
-]
-
-shortcuts = [
-  "garbage_book/New Garbage Book Page.shortcut",
-  "fmp/FMP Refresh.shortcut",
-  "fmp/FMP append.shortcut",
-  "fmp/Open ^file.shortcut"
-]
+applescripts = FileList['**/*.applescript.js'].map{|f| f.sub(/\.applescript.js$/, '.scpt')}
+shortcuts = FileList['**/*.shortcut.plist'].map{|f| f.sub(/\.plist$/, '')}
 
 bbedit = [
   "garbage_book/Garbage Book - save page.scpt",
