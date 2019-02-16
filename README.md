@@ -201,36 +201,36 @@ The only bummer is that I couldn't find a way to add the first line of the file 
 
 ## Installing Scripts on Mac
 
-Don't save the web pages where you can read the code! Either clone a local copy of the repo, or use the "Clone or Download" button above and choose "Download ZIP".
+If you're using all the same apps that I use (BBEdit, LaunchBar, FastScripts):
 
-For apps that support them, Unix-y scripts (`.rb` files and the like) can be dropped into the scripts folder as-is.
+1. Run `rake mac` in your local copy of this repo.
+    - That'll compile any scripts that need it, and copy each script to wherever it belongs (either `~/Library/Scripts` or whatever you're using as your BBEdit scripts folder).
 
-But the `.applescript` and `.applescript.js` files in this repo need to be compiled before you can use them:
-
-1. For each file, run `osacompile -o <NAME>.scpt -l JavaScript <NAME>.applescript.js`. (For plain `.applescript` files, omit the `-l JavaScript` option.) For example:
-
-    ```
-    osacompile -o "FMP - Append.scpt" -l JavaScript "FMP - Append.applescript.js"
-    ```
-1. Put the `.scpt` output files in `~/Library/Scripts` (or an app-specific scripts folder).
-
-Alternately, you can use /Applications/Utilities/Script Editor.app to compile scripts, but that can be kind of obnoxious.
-
-What's going on here is that the OS expects these scripts to be saved in a weird binary format that includes both the source code AND some kind of compiled bytecode (or, actually it might be real machine code, now that I'm reading the `osacompile` man page...). I think that used to be necessary to run scripts at a reasonable speed; remember that this stuff dates back to the ancient days of Classic Mac OS, although even today compiling OSA scripts on demand (e.g. by shelling out to `osascript`) is slower than you'd think. The scripts are posted as text here because putting unreadable binary junk into Git is bad form.
+If you _aren't_ using all my stuff, you'll need to build your own kit. Have fun! (And I actually do mean that!) If you're planning to do anything in MacOS's "JavaScript for Automation" language, you might want use my scripts as a starting point. If so, run `rake compile` to convert them into `.scpt` files that Script Editor.app can recognize.
 
 ## Installing Shortcut Files on iOS
 
-Don't save the web pages where you can read the code! Either clone a local copy of the repo, or use the "Clone or Download" button above and choose "Download ZIP".
+First you have to compile the shortcuts; after that, the best way to get them onto your device is with AirDrop. (Maybe you can email them too, idk.)
 
-After downloading any of the `.shortcut.plist` files in this repo to your Mac, you need to compile them and then get them to your iOS device somehow.
-
-Sharing shortcuts with people seems a bit squirrelly and IDK if anyone has tried to distribute them from GitHub before, so this section is actually speculative and I'm not 100% certain it'll work. But it _should,_ so... try it and lemme know! 😅
-
-1. Run `plutil -convert binary1 <FILES>`, where `<FILES>` is any number of these shortcut files.
-    - When you save and export a shortcut, it's saved as a binary plist. I'm distributing them as XML because (sing it with me) putting unreadable binary junk into Git is bad form. Anyway, this changes the XML back into what Shortcuts expects; it SHOULD be cleanly round-trippable, but I guess we'll see.
-1. Remove the `.plist` file extensions so they're just `.shortcut`.
-1. Send the files to your phone somehow (probably with iCloud Drive or Airdrop) and open them in the Shortcuts app.
-1. A couple of them have an "import question" that should trigger when you add them to Shortcuts. Paste your iA Writer URL auth token as the answer.
-1. If you're using different filenames or folder paths, edit the shortcuts to match. (I tried to put everything you'd need to change in a variable instead of hardcoding it, hopefully I got everything.)
+1. Run `rake ios` in your local copy of this repo to compile the shortcuts.
+    - This creates an `airdrop` subfolder, which will automatically open in Finder.
+1. Open a second Finder window and go to the "AirDrop" thing in the sidebar.
+1. Wake up your iOS device.
+1. For each shortcut file you want to transfer:
+    1. On your Mac, drag the `.shortcut` file to your device's AirDrop target.
+    1. On your device, the Shortcuts app will ask whether you want to add the shortcut. Say yes.
+    1. Answer any "import questions" as needed. (Usually this is for a URL auth token, which is unique to your installation of whatever app the shortcut needs to control.)
+    1. If you want to change any of the shortcut's behavior, open it in the normal editing interface and go wild.
 
 The shortcuts should already be configured to show up in your "Today" view widget.
+
+### Squicky Details
+
+You can get a shortcut off your phone by opening the editor, hitting the share button, choosing "Share as File," and putting it somewhere that your Mac can get to (probably in iCloud Drive or Dropbox).
+
+As it happens, that `.shortcut` file is a "binary plist" with a different file extension. Plists are Apple's homegrown data serialization format that they've been using since NextStep, and the binary version of the format is round-trippable with the XML version, which plays nicely with Git.
+
+The `plutil` command can convert these files in-place:
+
+- `plutil -convert xml1 <FILES>` to make an XML plist, suitable for version control.
+- `plutil -convert binary1 <FILES>` to make a binary plist, suitable for installing a shortcut on iOS.
