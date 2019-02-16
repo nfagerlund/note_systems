@@ -35,11 +35,17 @@ CLOBBER.concat(applescripts)
 CLOBBER.concat(shortcuts)
 CLOBBER << 'airdrop'
 
+desc "Compile and install everything"
+task install: [:bbedit, :fastscripts, :airdrop] do
+  puts "Done! To install shortcuts on iOS devices, see the 'airdrop' folder."
+  sh "open airdrop/"
+end
+
 desc "Compile everything"
 task compile: [:applescripts, :shortcuts]
-desc "Compile OSA scripts"
+# Compile OSA scripts
 task applescripts: applescripts
-desc "Compile shortcuts for iOS"
+# Compile shortcuts for iOS
 task shortcuts: shortcuts
 
 # How to compile:
@@ -51,47 +57,44 @@ rule '.scpt' => '.applescript.js' do |t|
   sh %Q{osacompile -o "#{t.name}" -l JavaScript "#{t.source}"}
 end
 
-desc "Compile and install everything"
-task install: [:bbedit, :fastscripts, :airdrop] do
-  puts "Done! To install shortcuts on iOS devices, see the 'airdrop' folder."
-end
-
-def check_dir(dir)
-  unless File.directory?(dir)
-    raise "Can't find scripts dir at #{dir}!"
-  end
-end
-
-desc "Install relevant scripts to FastScripts scripts folder"
+# Install relevant scripts to user scripts folder, which may as well always exist
 task fastscripts: [:applescripts] do
   dest = File.expand_path('~/Library/Scripts')
-  check_dir(dest)
-
+  FileUtils.mkdir_p(dest)
   FileUtils.cp(fastscripts, dest)
 end
 
-desc "Install relevant scripts to BBEdit scripts folder"
+def bullet_list(ary)
+  ary.map{|s| "  - #{s}"}.join("\n")
+end
+
+# Install relevant scripts to BBEdit scripts folder, which might not exist
 task bbedit: [:applescripts] do
-  dest = [
+  dest_options = [
     '~/Dropbox/Application Support/BBEdit/Scripts',
     '~/Library/Mobile Documents/com~apple~CloudDocs/Application Support/BBEdit/Scripts',
     '~/Library/Application Support/BBEdit/Scripts'
-  ].map{|dir|
-    File.expand_path(dir)
-  }.select {|dir|
+  ].map{|dir| File.expand_path(dir) }
+
+  dest = dest_options.select {|dir|
     File.directory?(dir)
   }.first
-  check_dir(dest)
 
-  FileUtils.cp(bbedit, dest)
+  if dest.nil?
+    puts "Can't find BBEdit scripts folder in any of the following spots: \n" <<
+         bullet_list(dest_options) << "\n" <<
+         "Skipping install for:\n" <<
+         bullet_list(bbedit)
+  else
+    FileUtils.cp(bbedit, dest)
+  end
 end
 
-desc "Copy compiled shortcuts to a separate folder for easy airdroppitude"
+# Copy compiled shortcuts to a separate folder for easy airdroppitude
 task airdrop: [:shortcuts] do
   FileUtils.mkdir_p('airdrop')
   File.open('airdrop/readme.txt', 'w', encoding: 'utf-8') {|f|
     f.puts("Use AirDrop to send these shortcuts to your iOS device.")
   }
   FileUtils.cp(shortcuts, 'airdrop/')
-  sh "open airdrop/"
 end
