@@ -46,6 +46,8 @@ Here's what you need to build FMP:
     - When moving lines, replace any occurrences of ` // ` (two slashes surrounded by spaces) with a line break. (Technically optional, but trust me, it's nice to have.)
 - A _very fast_ way to open any file from the lists folder by name.
 
+![the quick-append window from the FMP scripts, asking for a line of text.](./fmp.png)
+
 ### How to Use It
 
 Append a note whenever you need to remember something, using the first `^caret-tag` name that occurs to you. For example, if someone tells me about a book I really need to check out, I'll append something like:
