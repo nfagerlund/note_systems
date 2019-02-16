@@ -1,8 +1,6 @@
 require 'fileutils'
 require 'rake/clean'
 
-task default: [:compile]
-
 applescripts = [
   "garbage_book/Garbage Book - save page.scpt",
   "garbage_book/Garbage Book - Open.scpt",
@@ -35,19 +33,28 @@ CLOBBER.concat(applescripts)
 CLOBBER.concat(shortcuts)
 CLOBBER << 'airdrop'
 
-desc "Compile and install everything"
-task install: [:bbedit, :fastscripts, :airdrop] do
-  puts "Done! To install shortcuts on iOS devices, see the 'airdrop' folder."
+desc "Compile and install Mac scripts"
+task mac: [:bbedit, :fastscripts]
+
+desc "Compile iOS shortcuts and prep them for install"
+task ios: [:shortcuts] do
+  FileUtils.mkdir_p('airdrop')
+  File.open('airdrop/readme.txt', 'w', encoding: 'utf-8') {|f|
+    f.puts("Use AirDrop to send these shortcuts to your iOS device.")
+  }
+  FileUtils.cp(shortcuts, 'airdrop/')
+  puts "To install shortcuts on iOS devices, see the 'airdrop' folder. Opening now..."
+  sh "sleep 1"
   sh "open airdrop/"
 end
 
-desc "Compile everything"
+desc "Compile everything, but leave compiled files in-place"
 task compile: [:applescripts, :shortcuts]
+
 # Compile OSA scripts
 task applescripts: applescripts
 # Compile shortcuts for iOS
 task shortcuts: shortcuts
-
 # How to compile:
 rule '.shortcut' => '.shortcut.plist' do |t|
   FileUtils.cp(t.source, t.name)
@@ -88,13 +95,4 @@ task bbedit: [:applescripts] do
   else
     FileUtils.cp(bbedit, dest)
   end
-end
-
-# Copy compiled shortcuts to a separate folder for easy airdroppitude
-task airdrop: [:shortcuts] do
-  FileUtils.mkdir_p('airdrop')
-  File.open('airdrop/readme.txt', 'w', encoding: 'utf-8') {|f|
-    f.puts("Use AirDrop to send these shortcuts to your iOS device.")
-  }
-  FileUtils.cp(shortcuts, 'airdrop/')
 end
