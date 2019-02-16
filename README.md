@@ -64,19 +64,19 @@ As a variant, you could combine your append script and sort script and append di
 
 In physical space I can't remember where I set things down, and I compensate by predicting the first place I'll try to look for something and just setting it down _there._ This is all the way ass-backwards, but it _does_ at least work (whereas remembering doesn't) and I've gotten quite good at it.
 
-I wasn't thinking about that back when I made FMP, but I think it's that exact same workaround. Just guess which text file you'll open first at the moment when you need this info, and put it in _that_ file. That's also why it's so important to not have any friction when appending to files that don't exist yet; since I'm choosing files from the perspective of my future self, I'm thinking of them as already present, and having to explicitly create the file always felt like someone was asking me to repeat myself just to troll me.
+I wasn't thinking about that back when I made FMP, but I think it's that exact same workaround. Just guess which text file you'll open first at the moment when you need this info, and put it in _that_ file. That's also why it's so important to not have any friction when appending to files that don't exist yet; since I'm choosing files from the perspective of my future self, I'm thinking of them as already present, and having to explicitly create the file always felt like someone was trolling me by asking me to repeat myself (when really they heard me just fine the first time).
 
-The fact that this is all plain text is pretty important. When I got my first iPhone, I could bring it all along with me immediately (in a limited sort of way) without having to wait for someone to build an app that could read its weird tag database or whatever. And it's easy to do other weird stuff with note files whenever I need to. (Pipe them through grep, idk, whatever really.)
+Having this all in plain text has come in handy — when I got my first iPhone, I could bring it all along with me immediately (in a limited sort of way) without having to wait for someone to build an app that could read its weird tag database or whatever. And it's easy to do other odd stuff with note files whenever I need to. (Pipe them through grep, idk, whatever really.)
 
 ### Reference Implementation (Mac and iOS)
 
 #### On Your Mac:
 
 1. Get [FastScripts](https://red-sweater.com/fastscripts/), or some other way to assign global keyboard shortcuts for arbitrary shell scripts and AppleScripts.
-1. Get [LaunchBar](https://www.obdev.at/products/launchbar/), or some other tool that, when invoked with a directory of files, lets you incrementally search by typing part of a filename. (I think Alfred is the one that's popular these days, but I haven't tried it.)
-1. Make a folder in your iCloud Drive called `Lists`, then put a symlink to it in the root of your home folder for convenience.
+1. Get [LaunchBar](https://www.obdev.at/products/launchbar/), or some other tool that, when invoked with a directory of files, lets you incrementally search by typing part of a filename. (I think Alfred is the one that's popular these days, but I haven't tried it. Back when I originally built this, I was still using Quicksilver for everything.)
+1. Make a folder in your iCloud Drive called `Lists`, then put a symlink to it in the root of your home folder.
     - iCloud Drive subfolders are in a weird spot on disk! The easiest way to find their real location is to drag the folder from Finder to a terminal window at the moment when you need to type it. Anyway, you'll end up running something like `ln -s "/Users/nick/Library/Mobile Documents/com~apple~CloudDocs/Lists" ~/Lists`.
-1. Install the following scripts into `~/Library/Scripts` ([here's how](#installing-applescripts-on-mac)):
+1. Install the following scripts into `~/Library/Scripts` ([here's how](#installing-scripts-on-mac)):
     - [FMP - Append](./fmp/FMP%20-%20Append.applescript.js)
         - This one uses BBEdit for its optional "Append and open" button; you can edit the script and switch that to your preferred editor if you want.
     - [fmp.rb](./fmp/fmp.rb)
@@ -152,12 +152,12 @@ Anyway, I barely had to do anything to roll my own replacement. The only hard pa
 - Get [BBEdit](https://www.barebones.com/products/bbedit/).
     - Or any other scriptable editor, the whole point here is to use whatever app you're already married to. You'll have to write your own script for it, but that should be easy enough.
 - Make a folder in your iCloud Drive called `Garbage Book`; symlink it somewhere if you're feelin' it.
-- Install the following scripts into BBEdit's scripts folder ([here's how](#installing-applescripts-on-mac); btw, BBEdit's scripts menu has a convenience command to open that folder):
+- Install the following scripts into BBEdit's scripts folder ([here's how](#installing-scripts-on-mac); btw, BBEdit's scripts menu has a convenience command to open that folder):
     - [Garbage Book - save page](./garbage_book/Garbage%20Book%20-%20save%20page.applescript.js)
     - [Garbage Book - fix slug](./garbage_book/Garbage%20Book%20-%20fix%20slug.rb)
     - [Garbage Book - tear out page](./garbage_book/Garbage%20Book%20-%20tear%20out%20page.rb)
 - In BBEdit's "Menus & Shortcuts" settings, assign a hotkey to at least the save script; the others are optional.
-- Optionally, install the following script into `~/Library/Scripts` ([here's how](#installing-applescripts-on-mac)) and assign a global hotkey with FastScripts or something:
+- Optionally, install the following script into `~/Library/Scripts` ([here's how](#installing-scripts-on-mac)) and assign a global hotkey with FastScripts or something:
     - [Garbage Book - Open](./garbage_book/Garbage%20Book%20-%20Open.applescript.js)
 
 That's it! Type some stuff in a new text window, use your hotkey to save it to Garbage Book, and close it. Then, use your "open" hotkey to bring up Garbage Book in a browser window.
@@ -197,22 +197,28 @@ The only bummer is that I couldn't find a way to add the first line of the file 
 
 # Appendix
 
-## Installing AppleScripts on Mac
+## Installing Scripts on Mac
 
-For apps that support them, Unix-y scripts (`.rb` files and the like) can be dropped into the scripts folder as-is. But the `.applescript` and `.applescript.js` files in this repo need to be compiled before you can use them:
+Don't save the web pages where you can read the code! Either clone a local copy of the repo, or use the "Clone or Download" button above and choose "Download ZIP".
 
-1. Remove the `.js` extension, if present.
-1. Open the file in /Applications/Utilities/Script Editor.app.
-1. If it was a `.js` file, use the upper-left drop-down menu to change the language to JavaScript. (I never found a way to make Script Editor recognize an uncompiled source file as JavaScript, alas.)
-1. From the File menu, choose either "Export..." or "Save As...".
-1. In the save dialog, change the "File Format:" dropdown from "Text" to "Script".
-1. Save the new copy of the file, which has the same name but a `.scpt` extension.
+For apps that support them, Unix-y scripts (`.rb` files and the like) can be dropped into the scripts folder as-is.
 
-After that, you can put the `.scpt` copies in `~/Library/Scripts` (or an application-specific scripts folder) and they'll work as expected.
+But the `.applescript` and `.applescript.js` files in this repo need to be compiled before you can use them:
 
-What's going on here is that the OS expects these scripts to be saved in a weird binary format that includes both the source code AND some kind of compiled bytecode, so it can run them at a reasonable speed. (Remember that this stuff dates back to the days of Motorola 80k processors, although even today compiling OSA scripts on demand \[e.g. by shelling out to `osascript`\] is shockingly slow.) The scripts are posted as text here because putting unreadable binary junk into Git is bad form.
+1. For each file, run `osacompile -o <NAME>.scpt -l JavaScript <NAME>.applescript.js`. (For plain `.applescript` files, omit the `-l JavaScript` option.) For example:
+
+    ```
+    osacompile -o "FMP - Append.scpt" -l JavaScript "FMP - Append.applescript.js"
+    ```
+1. Put the `.scpt` output files in `~/Library/Scripts` (or an app-specific scripts folder).
+
+Alternately, you can use /Applications/Utilities/Script Editor.app to compile scripts, but that can be kind of obnoxious.
+
+What's going on here is that the OS expects these scripts to be saved in a weird binary format that includes both the source code AND some kind of compiled bytecode (or, actually it might be real machine code, now that I'm reading the `osacompile` man page...). I think that used to be necessary to run scripts at a reasonable speed; remember that this stuff dates back to the ancient days of Classic Mac OS, although even today compiling OSA scripts on demand (e.g. by shelling out to `osascript`) is slower than you'd think. The scripts are posted as text here because putting unreadable binary junk into Git is bad form.
 
 ## Installing Shortcut Files on iOS
+
+Don't save the web pages where you can read the code! Either clone a local copy of the repo, or use the "Clone or Download" button above and choose "Download ZIP".
 
 After downloading any of the `.shortcut.plist` files in this repo to your Mac, you need to compile them and then get them to your iOS device somehow.
 
