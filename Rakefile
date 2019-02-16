@@ -53,6 +53,27 @@ rule '.scpt' => '.applescript.js' do |t|
   sh %Q{osacompile -o "#{t.name}" -l JavaScript "#{t.source}"}
 end
 
+# Decompile on command:
+desc "Decompile a comma-separated list of shortcuts and scripts; remember to escape the brackets in zsh"
+task :decompile, [:files] do |t, args|
+  args.to_a.each do |compiled|
+    if File.exist?(compiled)
+      if compiled =~ /\.shortcut$/
+        source = compiled + '.plist'
+        FileUtils.cp(compiled, source)
+        sh %Q{plutil -convert xml1 "#{source}"}
+      elsif compiled =~ /\.scpt$/
+        source = compiled.sub(/\.scpt$/, '.applescript.js')
+        sh %Q{osadecompile "#{compiled}" > "#{source}"}
+      else
+        puts "Skipping #{compiled}, don't recognize it"
+      end
+    else
+      puts "Can't find #{compiled}, skipping"
+    end
+  end
+end
+
 # Install relevant scripts to user scripts folder, which may as well always exist
 task fastscripts: [:applescripts] do
   dest = File.expand_path('~/Library/Scripts')
