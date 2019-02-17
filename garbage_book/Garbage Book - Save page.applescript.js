@@ -1,14 +1,14 @@
 // Wow, even as gross as this is, it's like 0.03x as gross as the AppleScript version
 var slugLength = 25;
 var gbookDir = $('~/Library/Mobile Documents/com~apple~CloudDocs/Garbage Book').stringByExpandingTildeInPath.js;
-var annoyingCharacters = /[\\:\/\*\?"<>\|#%\$;\?\n]/g;
+var annoyingCharacters = /[\\:\/\*\?"<>\|#%\$;\?\n]+/g;
 var trailingJunk = /[ _\.]+$/;
 
 var bb = Application('BBEdit');
 var frontDocument = bb.textDocuments[0];
 
 var firstLine = frontDocument.text.lines[0].contents();
-var slug = firstLine.substring(0, slugLength).replace(annoyingCharacters, '_').replace(trailingJunk, '');
+var slug = firstLine.replace(annoyingCharacters, '_').substring(0, slugLength).replace(trailingJunk, '');
 
 var now = new Date();
 var year = now.getFullYear().toString(); // can't has strftime??
