@@ -123,10 +123,16 @@ I wasn't thinking about that when I made FMP, but I'm pretty sure I'm using it t
 
 BTW, I think that finally explains why it's so important to create files implicitly when I append to one that doesn't exist yet!! Since I'm choosing files from the perspective of my future self, I'm thinking of them as already present, and having to explicitly create the file always felt like someone was trolling me by asking me to repeat myself (when really they heard me just fine the first time). I always _knew_ that was the most important part of the whole thing, but had no idea why I was so fixated on it. Live and learn.
 
-It'd probably be smarter to have your append script write directly to the caret-tag files instead of detouring to the dump file first. I built it this way initially because I was lazy and not very good at scripting yet, and then it turned out that I really liked a couple features of the stupid way:
+It's probably smarter to have your append script write directly to the caret-tag files instead of detouring to the dump file first. I built it this way initially because I was lazy and not very good at scripting yet, and then it turned out that I really liked a couple features of the stupid way:
 
 - I can open the dump file and add a whole bunch of unrelated notes in a row.
 - It's easy to go back and tag a bunch of orphaned notes in the dump file later, if I suddenly think of a good place for them.
+
+...but if you want to try the direct-append versions, they're in the fmp/errata folder; no reason we can't have both ways.
+
+- [Append to ^file (shortcut)](./fmp/errata/Append%20to%20%5Efile.shortcut.plist)
+- [FMP - Direct Append (script)](./fmp/errata/FMP%20-%20Direct%20Append.applescript.js)
+
 
 -----
 
