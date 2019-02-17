@@ -67,15 +67,16 @@ task :decompile do |t, args|
   end
 end
 
+def bullet_list(ary)
+  ary.map{|s| "  - #{s}"}.join("\n")
+end
+
 # Install relevant scripts to user scripts folder, which may as well always exist
 task fastscripts: [:applescripts] do
   dest = File.expand_path('~/Library/Scripts')
   FileUtils.mkdir_p(dest)
+  puts "Copying files to #{dest}:\n" << bullet_list(fastscripts)
   FileUtils.cp(fastscripts, dest)
-end
-
-def bullet_list(ary)
-  ary.map{|s| "  - #{s}"}.join("\n")
 end
 
 # Install relevant scripts to BBEdit scripts folder, which might not exist
@@ -96,6 +97,7 @@ task bbedit: [:applescripts] do
          "Skipping install for:\n" <<
          bullet_list(bbedit)
   else
+    puts "Copying files to #{dest}:\n" << bullet_list(bbedit)
     FileUtils.cp(bbedit, dest)
   end
 end
