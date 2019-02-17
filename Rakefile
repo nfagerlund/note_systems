@@ -5,9 +5,9 @@ applescripts = FileList['**/*.applescript.js'].map{|f| f.sub(/\.applescript.js$/
 shortcuts = FileList['**/*.shortcut.plist'].map{|f| f.sub(/\.plist$/, '')}
 
 bbedit = [
-  "garbage_book/Garbage Book - save page.scpt",
-  "garbage_book/Garbage Book - fix slug.rb",
-  "garbage_book/Garbage Book - tear out page.rb"
+  "garbage_book/Garbage Book - Save page.scpt",
+  "garbage_book/Garbage Book - Fix slug.rb",
+  "garbage_book/Garbage Book - Tear out page.rb"
 ]
 
 fastscripts = [
