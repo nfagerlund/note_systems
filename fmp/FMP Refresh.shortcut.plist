@@ -524,7 +524,7 @@
 				<key>WFReplaceTextCaseSensitive</key>
 				<false/>
 				<key>WFReplaceTextFind</key>
-				<string>( // |$)</string>
+				<string>( +// +|$)</string>
 				<key>WFReplaceTextRegularExpression</key>
 				<true/>
 				<key>WFReplaceTextReplace</key>
