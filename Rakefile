@@ -14,7 +14,7 @@ fastscripts = [
   "garbage_book/Garbage Book - Open.scpt",
   "fmp/FMP - Open lists folder in LaunchBar.scpt",
   "fmp/FMP - Append.scpt",
-  "fmp/fmp.rb"
+  "fmp/FMP - Refresh.rb"
 ]
 
 # Generated files you can clean with `rake clobber`:
