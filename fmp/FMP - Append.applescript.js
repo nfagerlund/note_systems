@@ -1,7 +1,7 @@
 var app = Application.currentApplication(); // Should be FastScripts
 app.includeStandardAdditions = true;
 
-var fiend = $('~/Lists/fiend.txt').stringByExpandingTildeInPath; // this is an NSString; have to access its .js property to get a javascript string.
+var fiend = $('~/Library/Mobile Documents/com~apple~CloudDocs/Lists').stringByExpandingTildeInPath; // this is an NSString; have to access its .js property to get a javascript string.
 
 var result = app.displayDialog("Append text to " + fiend.js, {defaultAnswer: '', withTitle: 'Enter some text', buttons: ["Cancel", "Append and open", "Append"], defaultButton: "Append"});
 

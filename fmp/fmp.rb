@@ -20,7 +20,7 @@
 
 require 'pathname'
 
-FMP_DIR = Pathname.new( ENV["FMP_DIR"] || '~/Lists' ).expand_path
+FMP_DIR = Pathname.new( ENV["FMP_DIR"] || '~/Library/Mobile Documents/com~apple~CloudDocs/Lists' ).expand_path
 FMP_DUMP_TAG = ENV["FMP_DUMP_TAG"] || 'fiend'
 DUMP_FILE = FMP_DIR + "#{FMP_DUMP_TAG}.txt"
 
