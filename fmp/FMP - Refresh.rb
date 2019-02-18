@@ -21,14 +21,6 @@ FMP_DIR = Pathname.new('~/Library/Mobile Documents/com~apple~CloudDocs/Lists').e
 FMP_DUMP_TAG = 'fiend'
 DUMP_FILE = FMP_DIR + "#{FMP_DUMP_TAG}.txt"
 
-unless FMP_DIR.directory?
-  raise "Not a directory: #{FMP_DIR}"
-end
-
-unless DUMP_FILE.exist?
-  raise "File does not exist: #{DUMP_FILE}"
-end
-
 caretnotes = {}
 
 DUMP_FILE.readlines(encoding: 'utf-8').each { |line|
