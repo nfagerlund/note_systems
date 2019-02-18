@@ -9,7 +9,7 @@ var result = app.displayDialog("Append text to FMP; use ^caret-tags to choose a 
 if (result.buttonReturned == 'Append' || result.buttonReturned == 'Append and open') {
 	var caretNote = result.textReturned.match(/^\^([\w\-]+) (.*)$/);
 	if (caretNote) {
-		var tag = caretNote[1];
+		var tag = caretNote[1].toLowerCase();
 		var note = caretNote[2];
 	}
 	else {
