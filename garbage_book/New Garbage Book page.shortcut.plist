@@ -40,6 +40,24 @@
 			<dict>
 				<key>UUID</key>
 				<string>44C9CDAA-EB32-4476-8580-634A0B8BB96F</string>
+				<key>WFAskActionDefaultAnswer</key>
+				<dict>
+					<key>Value</key>
+					<dict>
+						<key>attachmentsByRange</key>
+						<dict>
+							<key>{0, 1}</key>
+							<dict>
+								<key>Type</key>
+								<string>ExtensionInput</string>
+							</dict>
+						</dict>
+						<key>string</key>
+						<string>￼</string>
+					</dict>
+					<key>WFSerializationType</key>
+					<string>WFTextTokenString</string>
+				</dict>
 				<key>WFAskActionPrompt</key>
 				<string>First line? (optional)</string>
 			</dict>
@@ -443,21 +461,6 @@
 	</array>
 	<key>WFWorkflowInputContentItemClasses</key>
 	<array>
-		<string>WFAppStoreAppContentItem</string>
-		<string>WFArticleContentItem</string>
-		<string>WFContactContentItem</string>
-		<string>WFDateContentItem</string>
-		<string>WFEmailAddressContentItem</string>
-		<string>WFGenericFileContentItem</string>
-		<string>WFImageContentItem</string>
-		<string>WFiTunesProductContentItem</string>
-		<string>WFLocationContentItem</string>
-		<string>WFDCMapsLinkContentItem</string>
-		<string>WFAVAssetContentItem</string>
-		<string>WFPDFContentItem</string>
-		<string>WFPhoneNumberContentItem</string>
-		<string>WFRichTextContentItem</string>
-		<string>WFSafariWebPageContentItem</string>
 		<string>WFStringContentItem</string>
 		<string>WFURLContentItem</string>
 	</array>
@@ -467,6 +470,7 @@
 	<array>
 		<string>NCWidget</string>
 		<string>WatchKit</string>
+		<string>ActionExtension</string>
 	</array>
 </dict>
 </plist>
