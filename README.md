@@ -203,6 +203,6 @@ Well, it took me until I was writing this whole thing up, but I _did_ eventually
 
 You can get a shortcut off your phone by opening the editor, hitting the share button, choosing "Share as File", and putting it somewhere that your Mac can get to (probably in iCloud Drive or Dropbox). That gets you a `.shortcut` file, which is a "binary plist" with a different file extension. You can cleanly round-trip the binary and XML plist formats with `plutil`, and the XML format plays nicely with Git.
 
-Once the XML is in Git, other people can install the shortcuts by converting them back to binary and airdropping them. And on your end, you can make changes as needed in the Shortcuts app and check those changes into version control by sending the updated file over and using it to overwrite the old XML. (That's what the `rake decompile` task here is for.)
+Once the XML is in Git, other people can install the shortcuts by converting them back to binary and airdropping them. And on your end, you can make changes as needed in the Shortcuts app and check those changes into version control by sending the updated file over and using it to overwrite the old XML. (That's what the `rake decompile` task here is for. Also, if some of your shortcuts have user-specific info you don't want to check in, this might be a good time to discover `git add -p`.)
 
 Be cool if you could convert a shortcut on-phone and check it in with Working Copy or something, but I have a suspicion that's gonna be a no-go.
