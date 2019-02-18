@@ -128,10 +128,10 @@ It's probably smarter to have your append script write directly to the caret-tag
 - I can open the dump file and add a whole bunch of unrelated notes in a row.
 - It's easy to go back and tag a bunch of orphaned notes in the dump file later, if I suddenly think of a good place for them.
 
-...but if you want to try the direct-append versions, they're in the fmp/errata folder; no reason we can't have both ways.
+...but feel free to try the direct-append versions; no reason we can't have both ways.
 
-- [Append to ^file (shortcut)](./fmp/errata/Append%20to%20%5Efile.shortcut.plist)
-- [FMP - Direct Append (script)](./fmp/errata/FMP%20-%20Direct%20Append.applescript.js)
+- [Append to ^file (shortcut)](./fmp/Append%20to%20%5Efile.shortcut.plist)
+- [FMP - Direct Append (script)](./fmp/FMP%20-%20Direct%20Append.applescript.js)
 
 
 -----
