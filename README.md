@@ -19,7 +19,7 @@ Both of these systems have a quality that I like to call "elegance through stupi
 
 ## Installation
 
-**You'll almost definitely want to build your own versions of these!** I assembled FMP and Garbage Book out of applications I was already using and a handful of scripts, and replaced a bunch of parts over the years; pretty much the whole point was to keep using the applications I was already using.
+**You'll want to build your own versions of these anyway!** I assembled FMP and Garbage Book out of apps I was already using and a handful of scripts, and replaced a bunch of parts over the years; really the whole appeal was that I'd keep using what I already liked, and I assume you'll want to do the same.
 
 The scripts in this repo are mostly presented as a source of ideas, a starting point; I don't expect anyone to use my exact setup. _That said,_ here's how to get that exact setup working.
 
@@ -172,11 +172,10 @@ Anyway, I barely had to do anything to roll my own replacement. The only hard pa
 
 The iOS version can't put that first-line summary into the title — kinda sucks, but I just can't find a way to rename an iCloud Drive file with Shortcuts, so c'est la vie. I might experiment with bringing up a text field that you can type a first line into before opening the new file; haven't decided yet if that'd be annoying or not. LMK if you come up with something brilliant.
 
-There were a few extra things I eventually added:
+There were a few extra tools I eventually added:
 
-- The "tear out page" script reverses the components of the filename, which takes a page out of the timeline and moves it to the end of the list. Sometimes useful.
-- The "fix slug" script leaves a page in the timeline, but updates its slug to match the current first line; useful when the current slug doesn't match the content, or if you've been using the iOS shortcut.
-
+- The "tear out page" script reverses the elements of the filename, which takes a page out of the timeline and moves it to the end of the list. Useful if one particular page is the most important thing you're working on for a week.
+- The "fix slug" script leaves a page in the timeline, but updates its slug to match the current first line. Useful when the slug doesn't match the content anymore, or if you've been using the iOS shortcut.
 
 ------
 
@@ -184,14 +183,14 @@ There were a few extra things I eventually added:
 
 ### Apps
 
-- FMP originally relied on Quicksilver for appending. _Yeah._ LaunchBar is nice for some things (and it's actually maintained), but its scriptability is lacking, and triggering its append action is annoying enough that I eventually gave up and wrote that append script, which I like better than the old way anyhow.
+- FMP originally relied on Quicksilver for appending. _Yeah._ LaunchBar is nice for some things (plus it's actually maintained), but it isn't as nice as QS was for appending text, so I eventually gave up and wrote that append script, which tbh is way nicer than appending with Quicksilver ever was anyhow.
 - There's probably other iOS text editors that could replace iA Writer in these shortcuts. You need something that can get persistent access to an arbitrary folder from the Files app, and can use `x-callback-url` actions to do scripted reading/writing/creation of files in that folder. But I like iA Writer quite a bit, so I'm not really on the hunt.
 
 ### OSA Scripts
 
-AppleScript, man. What a smoldering coal seam of a language. I've converted all the stuff in this repo to "JavaScript for Automation" over the years (which is dubiously maintained and heinously underdocumented, but which at least acts like a normal programming language some of the time), but if you want a real fuckin' ride, compare [the original Garbage Book save script](garbage_book/errata/Garbage%20Book%20-%20save%20page.applescript) to the current one. The spine-breaking contortions you need to go through to do even the most basic text munging kind of blows my mind.
+AppleScript, man. What a smoldering coal seam of a language. I've converted all the stuff in this repo to "JavaScript for Automation" over the years (which is dubiously maintained and heinously underdocumented but which at least acts like a normal programming language some of the time), but if you want a real fuckin' ride, compare [the original Garbage Book save script](garbage_book/errata/Garbage%20Book%20-%20save%20page.applescript) to the current one. The spine-breaking contortions it takes to do even the most basic text munging!
 
-But regardless of which language you're using, OSA scripts need to be compiled before use, and even though the compiled files retain the source code, they're saved as binary blobs that you don't want in your Git repo. Usually you'd use Script Editor.app to convert between text-only and compiled versions of a script, but there's no way to indicate that a text file is in JavaScript and still have Script Editor open it, which makes that even more of a pain than usual.
+Regardless which language you're using, OSA scripts need to be compiled before use, and even though the compiled files retain the source code, they're saved as binary blobs that you don't want in your Git repo. Usually you'd use Script Editor.app to convert between text-only and compiled versions of a script, but there's no way to indicate that a text file is in JavaScript and still have Script Editor open it, which makes that even more of a pain than usual.
 
 Anyway, `osacompile` and `osadecompile` are what you want for that.
 
@@ -199,9 +198,9 @@ Anyway, `osacompile` and `osadecompile` are what you want for that.
 
 You edit shortcuts with a graphical drag-and-drop interface, and ever since I got this stuff working I've been living in terror that I was gonna fumble something important and be unable to get it working again. I've gotten too used to modern version control!
 
-Well, it took me until I was writing this whole thing up, but I _did_ eventually come up with a way to version-control your shortcuts.
+Well, it took me until I was writing this whole thing up, but I _did_ eventually learn how to version-control your shortcuts.
 
-You can get a shortcut off your phone by opening the editor, hitting the share button, choosing "Share as File", and putting it somewhere that your Mac can get to (probably in iCloud Drive or Dropbox). That gets you a `.shortcut` file, which is a "binary plist" with a different file extension. You can cleanly round-trip the binary and XML plist formats with `plutil`, and the XML format plays nicely with Git.
+You can get a shortcut off your phone by opening the editor, hitting share, choosing "Share as File", and putting it somewhere your Mac can get to (like iCloud Drive or Dropbox or AirDrop). That gets you a `.shortcut` file, which is a "binary plist" with a different file extension. `plutil` can cleanly round-trip between the binary and XML plist formats, and the XML format plays nicely with Git.
 
 Once the XML is in Git, other people can install the shortcuts by converting them back to binary and airdropping them. And on your end, you can make changes as needed in the Shortcuts app and check those changes into version control by sending the updated file over and using it to overwrite the old XML. (That's what the `rake decompile` task here is for. Also, if some of your shortcuts have user-specific info you don't want to check in, this might be a good time to discover `git add -p`.)
 
