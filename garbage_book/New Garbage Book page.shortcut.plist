@@ -122,7 +122,20 @@
 		<integer>4271458815</integer>
 	</dict>
 	<key>WFWorkflowImportQuestions</key>
-	<array/>
+	<array>
+		<dict>
+			<key>ActionIndex</key>
+			<integer>0</integer>
+			<key>Category</key>
+			<string>Parameter</string>
+			<key>DefaultValue</key>
+			<string>/Locations/Garbage Book</string>
+			<key>ParameterKey</key>
+			<string>WFTextActionText</string>
+			<key>Text</key>
+			<string>Garbage Book directory (from iA Writer’s perspective)?</string>
+		</dict>
+	</array>
 	<key>WFWorkflowInputContentItemClasses</key>
 	<array>
 		<string>WFAppStoreAppContentItem</string>

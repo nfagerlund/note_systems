@@ -9,6 +9,8 @@
 			<string>is.workflow.actions.gettext</string>
 			<key>WFWorkflowActionParameters</key>
 			<dict>
+				<key>UUID</key>
+				<string>00B5F009-9975-49D9-86C0-E5A5549DAEB8</string>
 				<key>WFTextActionText</key>
 				<string>/Locations/Lists</string>
 			</dict>
@@ -17,7 +19,10 @@
 			<key>WFWorkflowActionIdentifier</key>
 			<string>is.workflow.actions.urlencode</string>
 			<key>WFWorkflowActionParameters</key>
-			<dict/>
+			<dict>
+				<key>UUID</key>
+				<string>52123401-B22B-40DE-B4A7-BD665A3B111E</string>
+			</dict>
 		</dict>
 		<dict>
 			<key>WFWorkflowActionIdentifier</key>
@@ -36,7 +41,7 @@
 				<key>UUID</key>
 				<string>600963FB-F7CA-4290-AB2A-9D9A2D3322CC</string>
 				<key>WFAskActionPrompt</key>
-				<string>^caret-tag plz 🥕</string>
+				<string>^caret-tag plz 🥕 (will trim spaces/^)</string>
 			</dict>
 		</dict>
 		<dict>
@@ -145,7 +150,20 @@
 		<integer>3679049983</integer>
 	</dict>
 	<key>WFWorkflowImportQuestions</key>
-	<array/>
+	<array>
+		<dict>
+			<key>ActionIndex</key>
+			<integer>0</integer>
+			<key>Category</key>
+			<string>Parameter</string>
+			<key>DefaultValue</key>
+			<string>/Locations/Lists</string>
+			<key>ParameterKey</key>
+			<string>WFTextActionText</string>
+			<key>Text</key>
+			<string>FMP directory (from iA Writer’s perspective)?</string>
+		</dict>
+	</array>
 	<key>WFWorkflowInputContentItemClasses</key>
 	<array>
 		<string>WFAppStoreAppContentItem</string>

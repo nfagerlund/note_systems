@@ -39,7 +39,10 @@
 			<key>WFWorkflowActionIdentifier</key>
 			<string>is.workflow.actions.urlencode</string>
 			<key>WFWorkflowActionParameters</key>
-			<dict/>
+			<dict>
+				<key>UUID</key>
+				<string>53D9F957-A6CA-4E52-84F3-1543CA0F364D</string>
+			</dict>
 		</dict>
 		<dict>
 			<key>WFWorkflowActionIdentifier</key>
@@ -245,6 +248,30 @@
 			<string>WFTextActionText</string>
 			<key>Text</key>
 			<string>iA Writer url auth token? (Available in the app settings)</string>
+		</dict>
+		<dict>
+			<key>ActionIndex</key>
+			<integer>2</integer>
+			<key>Category</key>
+			<string>Parameter</string>
+			<key>DefaultValue</key>
+			<string>/Locations/Lists</string>
+			<key>ParameterKey</key>
+			<string>WFTextActionText</string>
+			<key>Text</key>
+			<string>FMP directory (from iA Writer’s perspective)?</string>
+		</dict>
+		<dict>
+			<key>ActionIndex</key>
+			<integer>5</integer>
+			<key>Category</key>
+			<string>Parameter</string>
+			<key>DefaultValue</key>
+			<string>fiend</string>
+			<key>ParameterKey</key>
+			<string>WFTextActionText</string>
+			<key>Text</key>
+			<string>Dump tag? (Will use “&lt;dump tag&gt;.txt” as the dump file)</string>
 		</dict>
 	</array>
 	<key>WFWorkflowInputContentItemClasses</key>
