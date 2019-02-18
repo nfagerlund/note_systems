@@ -66,7 +66,7 @@ Good to go!
     - [Open ^file](./fmp/Open%20%5Efile.shortcut.plist)
     - [New Garbage Book page](./garbage_book/New%20Garbage%20Book%20page.shortcut.plist)
 
-Done!
+Done! You can use these shortcuts from the widget, plus you can use the system share menu for the ones that append to text files.
 
 ### Not Installing Anything
 
@@ -103,13 +103,13 @@ Well, tbh there used to be a file on my desktop that I kept all my crap in, and 
 
 ### How to Use It
 
-Append a note whenever you need to remember something, using the first `^caret-tag` name that occurs to you. For example, if someone tells me about a book I really need to check out, I'll append something like:
+Append a note whenever you need to remember something, using the first `^caret-tag` name that occurs to you. For example, if someone tells me about a book I should read, I'll append something like:
 
 ```
 ^seekbook Ann Leckie - Ancillary Justice
 ```
 
-Later, when I'm wondering what to read next, I'll open `seekbook.txt` and see what's in there.
+... and later I'll check `seekbook.txt` when I'm wondering what to read next.
 
 Feel free to append things without a `^caret-tag`; they can stay in the dump file until you think of something to do with them.
 
