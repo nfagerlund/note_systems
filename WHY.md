@@ -64,7 +64,7 @@ Anyway, I barely had to do anything to roll my own replacement. The only hard pa
 
 ### Slugs
 
-The iOS version can't put that first-line summary into the title — kinda sucks, but I just can't find a way to rename an iCloud Drive file with Shortcuts, so c'est la vie. I might experiment with bringing up a text field that you can type a first line into before opening the new file; haven't decided yet if that'd be annoying or not. LMK if you come up with something brilliant.
+The iOS version does things in the opposite order from the Mac version, because I couldn't convince Shortcuts to _rename_ an iCloud Drive file. So it gives you the option of typing a first line before creating the file; if you do, it uses that as the slug, and otherwise the slug is empty.
 
 ### Tweaks
 

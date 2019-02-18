@@ -118,12 +118,11 @@ Garbage Book acts like a spiral notebook. Turn to a blank page, do whatever I ne
 
 ### How to Use It
 
-Open a new text editor window and type for a while. When you remember you're in an unsaved buffer, hit the hotkey to save it in Garbage Book and then keep working.
+- On Mac: Open a new text editor window and type for a while. When you remember you're in an unsaved buffer, hit the hotkey to save it in Garbage Book and then keep working.
+- On iOS: hit the "new page" shortcut, type the first line of the page, hit OK, then keep typing.
 
 When you need to go back to something you were working on, open the Garbage Book folder in your editor's browser view. Look back to around the time when you were working on Thing, then use the first-line summaries to find the page you need.
 
 When you need to do something else with a page (move it into a Git repo, email it to someone, etc.), just drag it to wherever, maybe rename it, your call.
-
-### wtf?
 
 See also [What's the Deal w/ Garbage Book](./WHY.md#whats-the-deal-w-garbage-book).
