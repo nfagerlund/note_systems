@@ -2,7 +2,7 @@
 # Tidy up the slug on Garbage Book pages, and leave other filenames alone
 
 ARGF.set_encoding('utf-8')
-annoying_characters = %r{[\\/:\*\?"<>\|#%$;?\n\r]+}
+annoying_characters = %r{[\\/:\*\?"<>\|#%$;\n\r]+}
 trailing_junk = /[ _\.]+$/
 slug_length = 25
 
