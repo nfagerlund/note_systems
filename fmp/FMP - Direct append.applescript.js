@@ -16,6 +16,7 @@ else {
 	var note = result.textReturned;
 }
 var file = `${fmpDir}/${tag}.txt`;
+note = note.replace(/ +\/\/ +/g, "\n");
 
 // Create empty file if it doesn't exist:
 var fm = $.NSFileManager.defaultManager;
@@ -26,7 +27,7 @@ if (!( fm.fileExistsAtPath( $(file) ) )) {
 // Write text to file:
 var fh = $.NSFileHandle.fileHandleForWritingAtPath( $(file) );
 fh.seekToEndOfFile;
-fh.writeData( $( note.replace(/ +\/\/ +/g, "\n") + "\n" ).dataUsingEncoding($.NSUTF8StringEncoding) ); // writeData requires an NSData object, so we have to convert text to an NSString with $() and then convert it to NSData (which needs a specified encoding, accessible by name as a constant in the objc runtime).
+fh.writeData( $( note + "\n" ).dataUsingEncoding($.NSUTF8StringEncoding) ); // writeData requires an NSData object, so we have to convert text to an NSString with $() and then convert it to NSData (which needs a specified encoding, accessible by name as a constant in the objc runtime).
 fh.closeFile;
 
 if (result.buttonReturned == "Append and open") {
