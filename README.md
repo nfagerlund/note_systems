@@ -131,7 +131,7 @@ It's probably smarter to have your append script write directly to the caret-tag
 ...but feel free to try the direct-append versions; no reason we can't have both ways.
 
 - [Append to ^file (shortcut)](./fmp/Append%20to%20%5Efile.shortcut.plist)
-- [FMP - Direct Append (script)](./fmp/FMP%20-%20Direct%20Append.applescript.js)
+- [FMP - Direct Append (script)](./fmp/FMP%20-%20Direct%20append.applescript.js)
 
 
 -----
