@@ -16,8 +16,8 @@ var month = (now.getMonth() + 1).toString().padStart(2, "0"); // WHY WOULD YOU Z
 var day = now.getDate().toString().padStart(2, "0"); // obviously getDay is weekday, obviously
 var hour = now.getHours().toString().padStart(2, "0");
 var minute = now.getMinutes().toString().padStart(2, "0");
-var timestamp = year + '.' + month + '.' + day + ' (' + hour + minute + ')';
+var timestamp = `${year}.${month}.${day} (${hour}${minute})`;
 
-var newName = gbookDir + '/' + timestamp + ' ' + slug + '.txt';
+var newName = `${gbookDir}/${timestamp} ${slug}.txt`;
 
 bb.save(frontDocument, {to: Path(newName)}); // JS scripts get to avoid the whole file/alias/POSIX path chaos and just use Path(/posix-y/path).

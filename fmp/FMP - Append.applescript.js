@@ -3,7 +3,7 @@ app.includeStandardAdditions = true;
 
 var fiend = $("~/Library/Mobile Documents/com~apple~CloudDocs/Lists/fiend.txt").stringByExpandingTildeInPath; // this is an NSString; have to access its .js property to get a javascript string.
 
-var result = app.displayDialog("Append text to " + fiend.js, {defaultAnswer: "", withTitle: "Enter some text", buttons: ["Cancel", "Append and open", "Append"], defaultButton: "Append"}); // If you cancel, execution stops here.
+var result = app.displayDialog(`Append text to ${fiend.js}`, {defaultAnswer: "", withTitle: "Enter some text", buttons: ["Cancel", "Append and open", "Append"], defaultButton: "Append"}); // If you cancel, execution stops here.
 
 var fh = $.NSFileHandle.fileHandleForWritingAtPath(fiend);
 fh.seekToEndOfFile;

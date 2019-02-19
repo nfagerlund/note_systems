@@ -15,7 +15,7 @@ else {
 	var tag = dumpTag;
 	var note = result.textReturned;
 }
-var file = fmpDir + '/' + tag + '.txt';
+var file = `${fmpDir}/${tag}.txt`;
 
 // Create empty file if it doesn't exist:
 var fm = $.NSFileManager.defaultManager;
