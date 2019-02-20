@@ -1,11 +1,5 @@
 # FMP and Garbage Book are for Taking Notes
 
-Notes. Notes notes notes notes notes. 📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝
-
-Everyone has their own little system for taking notes, and the only exceptions are the people with ten or twenty little systems for taking notes. Some people use bullet journals, some people use receipts and gum wrappers wadded up at the bottom of their purse, a LOT of people use the built-in Notes app on their telephones, and about thirteen years ago there was even a baffling (yet somehow enticing) vogue for using a stack of index cards with a binder clip. There's only one common thread: no matter who you are or what fucked-up thing you're doing, everyone else's note-taking system sounds impossible to use without going the whole rest of the way around the bend. Why can't they just be sensible and do it your way? I mean _HONESTLY._
-
-## What is This?
-
 This README describes a pair of unpopular plain-text-based note-taking systems, which I've been using continuously for like ten-plus years:
 
 - [**FMP**](#fmp) is for remembering stuff. It lets you add a line at a time to any number of named text files.
@@ -78,15 +72,7 @@ Done! You can use these shortcuts from the widget, plus you can use the system s
 
 ## FMP
 
-I made this in 2006. FMP stands for, uh,
-
-- Fast Memo Pencil
-- Fiendish Master Plan
-- Free Mashed Potatoes
-- Fragmentary Mental Process
-- Folder of Messy Piles
-
-Well, tbh there used to be a file on my desktop that I kept all my crap in, and it was called "my fiendish master plan.rtf" because I was 22 and thought that was hilarious, and now I'm kind of stuck with it. 🤷🏽‍♀️ "Folder of Messy Piles" is a better name, imo.
+FMP lets you send notes to named text files. I don't have a very good analogy for what it is... maybe it's kind of like a "memory palace," except lazier and less mystic.
 
 ### What It Is
 
@@ -117,6 +103,16 @@ Before checking a list file, or just whenever you feel like it, run the refresh 
 
 ### Why
 
+I made this in 2006. FMP stands for, uh,
+
+- Fast Memo Pencil
+- Fiendish Master Plan
+- Free Mashed Potatoes
+- Fragmentary Mental Process
+- Folder of Messy Piles
+
+Well, tbh there used to be a file on my desktop that I kept all my crap in, and it was called "my fiendish master plan.rtf" because I was 22 and thought that was hilarious, and now I'm kind of stuck with it. 🤷🏽‍♀️ "Folder of Messy Piles" is a better name, imo.
+
 I can't remember where I set objects down, and I learned to compensate by predicting where my future self will try to look for something and just setting it down _there._ This is all the way ass-backwards, but it _does_ actually work (whereas remembering doesn't).
 
 I wasn't thinking about that when I made FMP, but I'm pretty sure I'm using it the exact same way — just guess which text file I'll check first for something, and put it in _that_ file. And if that's _not_ how you've been avoiding disaster for three decades plus, FMP probably sounds like fucking chaos and it's giving you anxiety just reading about it.
@@ -138,7 +134,7 @@ It's probably smarter to have your append script write directly to the caret-tag
 
 ## Garbage Book
 
-I made this in 2008. It's an electronic version of a spiral notebook. Turn to a blank page, do whatever I need to do, turn to a new blank page. If I need a page later, flip backwards until I find it. Tear a page out if I want to move it somewhere else.
+Garbage Book is an electronic version of a spiral notebook. Turn to a blank page, do whatever I need to do, turn to a new blank page. If I need a page later, flip backwards until I find it. Tear a page out if I want to move it somewhere else.
 
 ### What It Is
 
@@ -160,7 +156,7 @@ When you need to do something else with a page (move it into a Git repo, email i
 
 ### Why
 
-The main requirements here are that:
+I made this in 2008. The main requirements here are that:
 
 - The pages stay in the order they were created and don't move around, so it's easy to "flip back" to find something.
 - You can tell at a glance what's in a page without having to open the file.
@@ -205,3 +201,13 @@ You can get a shortcut off your phone by opening the editor, hitting share, choo
 Once the XML is in Git, other people can install the shortcuts by converting them back to binary and airdropping them. And on your end, you can make changes as needed in the Shortcuts app and check those changes into version control by sending the updated file over and using it to overwrite the old XML. (That's what the `rake decompile` task here is for. Also, if some of your shortcuts have user-specific info you don't want to check in, this might be a good time to discover `git add -p`.)
 
 Be cool if you could convert a shortcut on-phone and check it in with Working Copy or something, but I have a suspicion that's gonna be a no-go. (Update: whoa, [that might not be a no-go](https://routinehub.co/shortcut/1486) 😯)
+
+### Notes in General
+
+Notes. Notes notes notes notes notes. 📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝
+
+Everyone has their own little system for taking notes, and the only exceptions are the people with ten or twenty little systems for taking notes. Some people use bullet journals, some people use receipts and gum wrappers wadded up at the bottom of their purse, a LOT of people use the built-in Notes app on their telephones, and about thirteen years ago there was even a baffling (yet somehow enticing) vogue for using a stack of index cards with a binder clip. There's only one common thread: no matter who you are or what fucked-up thing you're doing, everyone else's note-taking system sounds impossible to use without going the whole rest of the way around the bend. Why can't they just be sensible and do it your way? I mean _HONESTLY._
+
+### To-Dos
+
+You can do what you want, but I humbly suggest not using FMP for to-dos or reminders. It's tempting when you first think of it, but because it lets you forget what files even exist until the moment you need them, it ends up being superb for finding things you're motivated to remember but bad for things where you might be a little reluctant.
