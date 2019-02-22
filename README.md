@@ -96,36 +96,15 @@ Feel free to append things without a `^caret-tag`; they can stay in the dump fil
 
 Before checking a list file, or just whenever you feel like it, run the refresh script.
 
-### Why
+### wtf?
 
-I made this in 2006. FMP stands for, uh,
-
-- Fast Memo Pencil
-- Fiendish Master Plan
-- Free Mashed Potatoes
-- Fragmentary Mental Process
-- Folder of Messy Piles
-
-Well, tbh there used to be a file on my desktop that I kept all my crap in, and it was called "my fiendish master plan.rtf" because I was 22 and thought that was hilarious, and now I'm kind of stuck with it. 🤷🏽‍♀️ "Folder of Messy Piles" is a better name, imo.
-
-I can't remember where I set objects down, and I learned to compensate by predicting where my future self will try to look for something and just setting it down _there._ This is all the way ass-backwards, but it _does_ actually work (whereas remembering doesn't).
-
-I wasn't thinking about that when I made FMP, but I'm pretty sure I'm using it the exact same way — just guess which text file I'll check first for something, and put it in _that_ file. And if that's _not_ how you've been avoiding disaster for three decades plus, FMP probably sounds like fucking chaos and it's giving you anxiety just reading about it.
-
-BTW, I think that finally explains why it's so important to create files implicitly when I append to one that doesn't exist yet!! Since I'm choosing files from the perspective of my future self, I'm thinking of them as already present, and having to explicitly create the file always felt like someone was trolling me by asking me to repeat myself (when really they heard me just fine the first time). I always _knew_ that was the most important part of the whole thing, but had no idea why I was so fixated on it. Live and learn.
-
-It's probably smarter to have your append script write directly to the caret-tag files instead of detouring to the dump file first, so that's what the variant "direct append" scripts do ([mac](./fmp/FMP%20-%20Direct%20append.applescript.js), [ios](./fmp/Append%20to%20%5Efile.shortcut.plist)). I originally built it the way I did because I was lazy and bad at scripting, but then it turned out that I really liked a couple features of the stupid way:
-
-- I can open the dump file and add a whole bunch of unrelated notes in a row.
-- It's easy to go back and tag a bunch of orphaned notes in the dump file later, if I suddenly think of a good place for them.
-
-Anyway, no reason you can't use both ways if you want!
+See also [What's the Deal w/ FMP](./WHY.md#whats-the-deal-w-fmp).
 
 -----
 
 ## Garbage Book
 
-Garbage Book is an electronic version of a spiral notebook. Turn to a blank page, do whatever I need to do, turn to a new blank page. If I need a page later, flip backwards until I find it. Tear a page out if I want to move it somewhere else.
+Garbage Book acts like a spiral notebook. Turn to a blank page, do whatever I need to do, turn to a new blank page. If I need a page later, flip backwards until I find it. Tear a page out if I want to move it somewhere else.
 
 ### What It Is
 
@@ -145,60 +124,6 @@ When you need to go back to something you were working on, open the Garbage Book
 
 When you need to do something else with a page (move it into a Git repo, email it to someone, etc.), just drag it to wherever, maybe rename it, your call.
 
-### Why
+### wtf?
 
-I made this in 2008. The main requirements here are that:
-
-- The pages stay in the order they were created and don't move around, so it's easy to "flip back" to find something.
-- You can tell at a glance what's in a page without having to open the file.
-- "Turning to a blank page" is as close to a single action as possible; you shouldn't have to repeat your intent multiple times by specifying which folder to save it in or choosing a filename.
-
-There were already apps that worked like this in 2007! I think Notational Velocity was the first one I used, but the iOS (and, later, Mac) Notes app is also close. But I already had a text editor I really liked ([BBEdit](https://www.barebones.com/products/bbedit/), don't @ me), and the editing interface in those single-purpose notebook apps felt rinky-dink and annoying to me. And they all saved their pages in a database or some weird format instead of just using normal-ass UTF-8 .txt files — what if I need to cat something I'm working on into a shell script, huh??? _What then??????_
-
-Anyway, I barely had to do anything to roll my own replacement. The only hard part was doing text manipulation in AppleScript, which is less of a problem now that you can use JavaScript instead.
-
-The iOS version can't put that first-line summary into the title — kinda sucks, but I just can't find a way to rename an iCloud Drive file with Shortcuts, so c'est la vie. I might experiment with bringing up a text field that you can type a first line into before opening the new file; haven't decided yet if that'd be annoying or not. LMK if you come up with something brilliant.
-
-There were a few extra tools I eventually added:
-
-- The "tear out page" script reverses the elements of the filename, which takes a page out of the timeline and moves it to the end of the list. Useful if one particular page is the most important thing you're working on for a week.
-- The "fix slug" script leaves a page in the timeline, but updates its slug to match the current first line. Useful when the slug doesn't match the content anymore, or if you've been using the iOS shortcut.
-
-------
-
-## Appendix
-
-### Apps
-
-- FMP originally relied on Quicksilver for appending. _Yeah._ LaunchBar is nice for some things (plus it's actually maintained), but it isn't as nice as QS was for appending text, so I eventually gave up and wrote that append script, which tbh is way nicer than appending with Quicksilver ever was anyhow.
-- There's probably other iOS text editors that could replace iA Writer in these shortcuts. You need something that can get persistent access to an arbitrary folder from the Files app, and can use `x-callback-url` actions to do scripted reading/writing/creation of files in that folder. But I like iA Writer quite a bit, so I'm not really on the hunt.
-
-### OSA Scripts
-
-AppleScript, man. What a smoldering coal seam of a language. I've converted all the stuff in this repo to "JavaScript for Automation" over the years (which is dubiously maintained and heinously underdocumented but which at least acts like a normal programming language some of the time), but if you want a real fuckin' ride, compare [the original Garbage Book save script](garbage_book/errata/Garbage%20Book%20-%20save%20page.applescript) to the current one. The spine-breaking contortions it takes to do even the most basic text munging!
-
-Regardless which language you're using, OSA scripts need to be compiled before use, and even though the compiled files retain the source code, they're saved as binary blobs that you don't want in your Git repo. Usually you'd use Script Editor.app to convert between text-only and compiled versions of a script, but there's no way to indicate that a text file is in JavaScript and still have Script Editor open it, which makes that even more of a pain than usual.
-
-Anyway, `osacompile` and `osadecompile` are what you want for that.
-
-### Shortcuts
-
-You edit shortcuts with a graphical drag-and-drop interface, and ever since I got this stuff working I've been living in terror that I was gonna fumble something important and be unable to get it working again. I've gotten too used to modern version control!
-
-Well, it took me until I was writing this whole thing up, but I _did_ eventually learn how to version-control your shortcuts.
-
-You can get a shortcut off your phone by opening the editor, hitting share, choosing "Share as File", and putting it somewhere your Mac can get to (like iCloud Drive or Dropbox or AirDrop). That gets you a `.shortcut` file, which is a "binary plist" with a different file extension. `plutil` can cleanly round-trip between the binary and XML plist formats, and the XML format plays nicely with Git.
-
-Once the XML is in Git, other people can install the shortcuts by converting them back to binary and airdropping them. And on your end, you can make changes as needed in the Shortcuts app and check those changes into version control by sending the updated file over and using it to overwrite the old XML. (That's what the `rake decompile` task here is for. Also, if some of your shortcuts have user-specific info you don't want to check in, this might be a good time to discover `git add -p`.)
-
-Be cool if you could convert a shortcut on-phone and check it in with Working Copy or something, but I have a suspicion that's gonna be a no-go. (Update: whoa, [that might not be a no-go](https://routinehub.co/shortcut/1486) 😯)
-
-### Notes in General
-
-Notes. Notes notes notes notes notes. 📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝
-
-Everyone has their own little system for taking notes, and the only exceptions are the people with ten or twenty little systems for taking notes. Some people use bullet journals, some people use receipts and gum wrappers wadded up at the bottom of their purse, a LOT of people use the built-in Notes app on their telephones, and about thirteen years ago there was even a baffling (yet somehow enticing) vogue for using a stack of index cards with a binder clip. There's only one common thread: no matter who you are or what fucked-up thing you're doing, everyone else's note-taking system sounds impossible to use without going the whole rest of the way around the bend. Why can't they just be sensible and do it your way? I mean _HONESTLY._
-
-### To-Dos
-
-You can do what you want, but I humbly suggest not using FMP for to-dos or reminders. It's tempting when you first think of it, but because it lets you forget what files even exist until the moment you need them, it ends up being superb for finding things you're motivated to remember but bad for things where you might be a little reluctant.
+See also [What's the Deal w/ Garbage Book](./WHY.md#whats-the-deal-w-garbage-book).
