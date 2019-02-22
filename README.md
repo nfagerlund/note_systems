@@ -21,13 +21,12 @@ First, check out a local copy of this repo.
 
 ### Installing the Mac Stuff
 
-1. Get [FastScripts](https://red-sweater.com/fastscripts/).
-1. Get [LaunchBar](https://www.obdev.at/products/launchbar/).
-1. Get [BBEdit](https://www.barebones.com/products/bbedit/)
-    - (And make sure to launch it at least once before the rest of these steps, just so that the Application Support directory exists.)
-1. Make a new folder in iCloud Drive called `Lists`.
-1. Make a new folder in iCloud Drive called `Garbage Book`.
-1. In your working copy of this repo, run `rake mac` to compile and install all the scripts.
+1. Get [FastScripts](https://red-sweater.com/fastscripts/), [LaunchBar](https://www.obdev.at/products/launchbar/), and [BBEdit](https://www.barebones.com/products/bbedit/).
+    - Launch BBEdit at least once so it has a chance to make its Application Support directory.
+1. Make two new folders in iCloud Drive:
+    - `Lists`
+    - `Garbage Book`
+1. Run `rake mac` in your working copy of this repo. This installs everything.
 1. In BBEdit's "Menus & Shortcuts" preferences, choose good keyboard shortcuts for the following scripts:
     - [Garbage Book - Save page](./garbage_book/Garbage%20Book%20-%20Save%20page.applescript.js)
     - [Garbage Book - Fix slug](./garbage_book/Garbage%20Book%20-%20Fix%20slug.rb)
@@ -35,6 +34,7 @@ First, check out a local copy of this repo.
 1. In FastScripts's preferences, choose good **global** keyboard shortcuts for the following scripts:
     - [Garbage Book - Open](./garbage_book/Garbage%20Book%20-%20Open.applescript.js)
     - [FMP - Append](./fmp/FMP%20-%20Append.applescript.js)
+        - and/or [FMP - Direct append](./fmp/FMP%20-%20Direct%20append.applescript.js)
     - [FMP - Refresh](./fmp/FMP%20-%20Refresh.rb)
     - [FMP - Open lists folder in LaunchBar](./fmp/FMP%20-%20Open%20lists%20folder%20in%20LaunchBar.applescript.js)
 
@@ -42,23 +42,18 @@ Good to go!
 
 ### Installing the iOS Stuff
 
-1. Get [Shortcuts](https://itunes.apple.com/us/app/shortcuts/id915249334).
-1. Get [iA Writer](https://itunes.apple.com/us/app/ia-writer/id775737172).
-1. Enable the Shortcuts widget in your "Today" view, if it isn't already on.
+1. Get [Shortcuts](https://itunes.apple.com/us/app/shortcuts/id915249334) and [iA Writer](https://itunes.apple.com/us/app/ia-writer/id775737172).
+1. Add Shortcuts to the "Today" view.
     - (Swipe left from notifications or the home screen, and tap "Edit" at the bottom.)
 1. In iA Writer, add the "Lists" and "Garbage Book" folders to the Library.
     - Go to the main "Library" screen, tap "Edit" in the upper right, tap "Add Location" at the bottom of the "Locations" list, and follow the instructions in the pop-up.
 1. In iA Writer, enable URL commands and get your auth token.
     - Go to the main "Library" screen, tap the gear in the upper left, go to "URL Commands", turn the switch on, and copy the token.
 1. On your Mac, run `rake ios` in your working copy of this repo.
-    - This compiles all the shortcuts and creates an `airdrop` subfolder, which will automatically open in Finder.
-1. Open a second Finder window and go to the "AirDrop" thing in the sidebar.
+    - This compiles all the shortcuts and reveals them in a Finder window.
+1. Open a second Finder window and go to "AirDrop" in the sidebar.
 1. Wake up your iOS device.
-1. One by one, drag each of the following `.shortcut` files from the first Finder window to your device's AirDrop target. For each shortcut, you'll need to confirm installation; a few of them will also ask you to paste in your iA Writer auth token.
-    - [Append to FMP](./fmp/Append%20to%20FMP.shortcut.plist)
-    - [FMP Refresh](./fmp/FMP%20Refresh.shortcut.plist)
-    - [Open ^file](./fmp/Open%20%5Efile.shortcut.plist)
-    - [New Garbage Book page](./garbage_book/New%20Garbage%20Book%20page.shortcut.plist)
+1. One by one, drag each `.shortcut` file from the first Finder window to your device's AirDrop target. Confirm installation for each shortcut; a few of them will ask for your iA Writer auth token.
 
 Done! You can use these shortcuts from the widget, plus you can use the system share menu for the ones that append to text files.
 
@@ -119,16 +114,12 @@ I wasn't thinking about that when I made FMP, but I'm pretty sure I'm using it t
 
 BTW, I think that finally explains why it's so important to create files implicitly when I append to one that doesn't exist yet!! Since I'm choosing files from the perspective of my future self, I'm thinking of them as already present, and having to explicitly create the file always felt like someone was trolling me by asking me to repeat myself (when really they heard me just fine the first time). I always _knew_ that was the most important part of the whole thing, but had no idea why I was so fixated on it. Live and learn.
 
-It's probably smarter to have your append script write directly to the caret-tag files instead of detouring to the dump file first. I built it this way initially because I was lazy and not very good at scripting yet, and then it turned out that I really liked a couple features of the stupid way:
+It's probably smarter to have your append script write directly to the caret-tag files instead of detouring to the dump file first, so that's what the variant "direct append" scripts do ([mac](./fmp/FMP%20-%20Direct%20append.applescript.js), [ios](./fmp/Append%20to%20%5Efile.shortcut.plist)). I originally built it the way I did because I was lazy and bad at scripting, but then it turned out that I really liked a couple features of the stupid way:
 
 - I can open the dump file and add a whole bunch of unrelated notes in a row.
 - It's easy to go back and tag a bunch of orphaned notes in the dump file later, if I suddenly think of a good place for them.
 
-...but feel free to try the direct-append versions; no reason we can't have both ways.
-
-- [Append to ^file (shortcut)](./fmp/Append%20to%20%5Efile.shortcut.plist)
-- [FMP - Direct Append (script)](./fmp/FMP%20-%20Direct%20append.applescript.js)
-
+Anyway, no reason you can't use both ways if you want!
 
 -----
 
