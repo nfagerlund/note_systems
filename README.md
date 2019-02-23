@@ -67,7 +67,7 @@ Done! You can use these shortcuts from the widget, plus you can use the system s
 
 ## FMP
 
-FMP lets you send notes to named text files. I don't have a very good analogy for what it is... maybe it's kind of like a "memory palace," except lazier and less mystic.
+FMP lets you quickly add notes to named buckets of notes. You don't have to set up your buckets ahead of time, you can just start using new ones as you need them.
 
 ### What It Is
 
