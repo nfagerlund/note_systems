@@ -36,7 +36,7 @@ The thing is, I originally built FMP the way I did because I was lazy and bad at
 
 ### To-Dos
 
-You can do whatever what you want, but I humbly suggest not using FMP for to-dos or reminders. It's tempting when you first think of it, but because it lets you forget what files even exist until the moment you need them, it ends up being good for finding things you're motivated to remember but bad for things where you might be a little reluctant.
+You can do whatever what you want, but I humbly suggest not using FMP for to-dos or reminders. It's tempting when you first think of it, but I've found it's good for things you're motivated to remember and bad for things you're reluctant to remember.
 
 ### Ancient History
 
@@ -86,7 +86,9 @@ Mac-only, because of the automated file renames.
 
 ## OSA Scripts
 
-AppleScript, man. What a smoldering coal seam of a language. I've converted all the stuff in this repo to "JavaScript for Automation" over the years (which is dubiously maintained and heinously underdocumented but which at least acts like a normal programming language some of the time), but if you want a real fuckin' ride, compare [the original Garbage Book save script](garbage_book/errata/Garbage%20Book%20-%20save%20page.applescript) to the current one. The spine-breaking contortions it takes to do even the most basic text munging!
+AppleScript, man. What a smoldering coal seam of a language. I've converted all the stuff in this repo to "JavaScript for Automation" over the years, but if you wanna huff some noxious fumes, compare [the original Garbage Book save script](garbage_book/errata/Garbage%20Book%20-%20save%20page.applescript) to the current one. The spine-breaking contortions it takes to do even the most basic text replacements!
+
+That said, while JXA at least acts like a normal programming language some of the time, it is both heinously underdocumented and dubiously maintained. For example, `.whose({"_and": [...]})` clauses are just 100% broken in at least Mojave (`error -1700 can't convert types`) and I can't seem to find any information about wtf is up with that. And any StackOverflow question about JXA is immediately taken over by one specific axe-grinding weirdo. (Although their comments did actually help me understand what's going on with "element arrays" under the hood, so good on them for that.) TBH everything about application scripting on the Mac seems to be rotting right now, and maybe it was a bad idea to begin with, except that it's just so _useful_ sometimes, ugh.
 
 Regardless which language you're using, OSA scripts need to be compiled before use, and even though the compiled files retain the source code, they're saved as binary blobs that you don't want in your Git repo. Usually you'd use Script Editor.app to convert between text-only and compiled versions of a script, but there's no way to indicate that a text file is in JavaScript and still have Script Editor open it, which makes that even more of a pain than usual.
 
@@ -104,7 +106,7 @@ You can get a shortcut off your phone by opening the editor, hitting share, choo
 
 Once the XML is in Git, other people can install the shortcuts by converting them back to binary and airdropping them. And on your end, you can make changes as needed in the Shortcuts app and check those changes into version control by sending the updated file over and using it to overwrite the old XML. (That's what the `rake decompile` task here is for. Also, if some of your shortcuts have user-specific info you don't want to check in, this might be a good time to discover `git add -p`.)
 
-Be cool if you could convert a shortcut on-phone and check it in with Working Copy or something, but I have a suspicion that's gonna be a no-go. (Update: whoa, [that might not be a no-go](https://routinehub.co/shortcut/1486) 😯)
+Be cool if you could convert a shortcut on-phone and check it in with Working Copy or something, but I have a suspicion that's gonna be a no-go. (Update: whoa, [that might not be a no-go](https://routinehub.co/shortcut/1486). 😯 I'm going to keep doing the commits on a computer, but I definitely adopted the snippet that dumps all your shortcuts to an iCloud Drive folder as xml plists.)
 
 -----
 
