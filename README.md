@@ -51,9 +51,9 @@ Good to go!
     - Go to the main "Library" screen, tap the gear in the upper left, go to "URL Commands", turn the switch on, and copy the token.
 1. On your Mac, run `rake ios` in your working copy of this repo.
     - This compiles all the shortcuts and reveals them in a Finder window.
-1. Open a second Finder window and go to "AirDrop" in the sidebar.
-1. Wake up your iOS device.
-1. One by one, drag each `.shortcut` file from the first Finder window to your device's AirDrop target. Confirm installation for each shortcut; a few of them will ask for your iA Writer auth token.
+1. AirDrop the shortcuts to your iOS device.
+    1. Open a second Finder window, go to "AirDrop" in the sidebar, and wake up your iOS device.
+    1. One by one, drag each shortcut to your device's AirDrop target; on your device, confirm installation. Some of them will ask for your iA Writer auth token.
 
 Done! You can use these shortcuts from the widget, plus you can use the system share menu for the ones that append to text files.
 
