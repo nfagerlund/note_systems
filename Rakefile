@@ -84,6 +84,7 @@ end
 task bbedit: [:applescripts] do
   dest_options = [
     '~/Dropbox/Application Support/BBEdit/Scripts',
+    '~/Library/Mobile Documents/iCloud~com~barebones~bbedit/Documents/Application Support/Scripts',
     '~/Library/Mobile Documents/com~apple~CloudDocs/Application Support/BBEdit/Scripts',
     '~/Library/Application Support/BBEdit/Scripts'
   ].map{|dir| File.expand_path(dir) }
