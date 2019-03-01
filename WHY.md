@@ -16,7 +16,7 @@ The name stands for, uh,
 
 Well, tbh there used to be a file on my desktop that I kept all my crap in, and it was called "my fiendish master plan.rtf" because I was 22 and thought that was hilarious, and now I'm kind of stuck with it. 🤷🏽‍♀️ "Folder of Messy Piles" is a better name, imo.
 
-### Finding Things
+### Finding Things in Reverse
 
 I can't remember where I set objects down, and I learned to compensate by predicting where my future self will try to look for something and just setting it down _there._ This is all the way ass-backwards, but it _does_ actually work (whereas remembering doesn't).
 
@@ -33,6 +33,14 @@ The thing is, I originally built FMP the way I did because I was lazy and bad at
 - I can open the dump file and add a whole bunch of unrelated notes in a row.
 - It's easy to go back and tag a bunch of orphaned notes in the dump file later, if I suddenly think of a good place for them.
 - ...uh, running the refresh script feels kinda good. I can't really explain it, it's just really satisfying. 😑 Sorry.
+
+### Double Slash Newlines
+
+I feel like I pretty much got FMP's design right on the first try. Or, not universally right (I mean, just look at it), but _exactly how I want it._ I've made parts of it more reliable or whatever over the years, but I haven't changed how it works.
+
+Except for one thing: that `first line // second line` trick, where a double slash turns into a line break. I just found myself doing it all the time — usually I wanted to put two things in the didread file but was too lazy to open the append field twice, so I'd just leave some slashes to remind me later where the new line was meant to go.
+
+Come to think of it, that's how the ^caret-tags started, too — I started using them to remember context for otherwise cryptic notes in my dump file long before I had any way to sift them out. Then eventually I got frustrated by how bullshit it was to sort them out by hand, and here we are.
 
 ### To-Dos
 
@@ -58,7 +66,7 @@ What I really wanted was something where:
 - You can tell at a glance what's in a page without having to open the file.
 - "Turning to a blank page" is as close to a single action as possible; you shouldn't have to repeat your intent multiple times by specifying which folder to save it in or choosing a filename.
 
-There were already apps that (mostly) worked like this in 2007! I think Notational Velocity was the first one I used, but the iOS (and, later, Mac) Notes app is also close. But I already had a text editor I really liked ([BBEdit](https://www.barebones.com/products/bbedit/), don't @ me), and the editing interface in those single-purpose notebook apps felt rinky-dink and annoying to me. And they all saved their pages in a database or some weird format instead of just using normal-ass UTF-8 .txt files — what if I need to cat something I'm working on into a shell script, huh??? _What then??????_
+There were already apps that (mostly) worked like this in 2007! I think Notational Velocity was the first one I used, but the iOS (and, later, Mac) Notes app is also close. But I already had a text editor I really liked ([BBEdit](https://www.barebones.com/products/bbedit/), don't @ me), and the editing interface in those single-purpose notebook apps felt rinky-dink and annoying to me. Plus they all saved their pages in a database or some other weird format instead of just using normal-ass UTF-8 .txt files — what if I need to cat something I'm working on into a shell script, huh??? _What then??????_
 
 Anyway, I barely had to do anything to roll my own replacement. The only hard part was doing text manipulation in AppleScript, which is less of a problem now that you can use JavaScript instead.
 
