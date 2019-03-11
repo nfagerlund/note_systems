@@ -34,17 +34,17 @@ The thing is, I originally built FMP the way I did because I was lazy and bad at
 - It's easy to go back and tag a bunch of orphaned notes in the dump file later, if I suddenly think of a good place for them.
 - ...uh, running the refresh script feels kinda good. I can't really explain it, it's just really satisfying. 😑 Sorry.
 
-### Double Slash Newlines
+### Cowpaths
 
-I feel like I pretty much got FMP's design right on the first try. Or, not universally right (I mean, just look at it), but _exactly how I want it._ I've made parts of it more reliable or whatever over the years, but I haven't changed how it works.
-
-Except for one thing: that `first line // second line` trick, where a double slash turns into a line break. I just found myself doing it all the time — usually I wanted to put two things in the didread file but was too lazy to open the append field twice, so I'd just leave some slashes to remind me later where the new line was meant to go.
+I pretty much got FMP's design exactly how I wanted it on the first try, and mostly haven't changed how it works — the only real addition in 13 years was that `first line // second line` trick, where a double slash turns into a line break. I just found myself already doing it all the time — I'd want to put two things in the didread file but was too lazy to open the append field twice, so I'd just leave some slashes to remind me later where the break was supposed to go.
 
 Come to think of it, that's how the ^caret-tags started, too — I started using them to remember context for otherwise cryptic notes in my dump file long before I had any way to sift them out. Then eventually I got frustrated by how bullshit it was to sort them out by hand, and here we are.
 
 ### To-Dos
 
 You can do whatever what you want, but I humbly suggest not using FMP for to-dos or reminders. It's tempting when you first think of it, but I've found it's good for things you're motivated to remember and bad for things you're reluctant to remember.
+
+One thing that does work OK is catching tasks before you forget them and then moving them into your real to-do list later.
 
 ### Ancient History
 
