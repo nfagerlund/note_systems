@@ -1,6 +1,6 @@
 # FMP and Garbage Book are for Taking Notes
 
-This README describes a pair of unpopular plain-text-based note-taking systems, which I've been using continuously for like ten-plus years:
+This README describes some unpopular plain-text-based note-taking systems, which I've been using continuously for like ten-plus years:
 
 - [**FMP**](#fmp) is for remembering stuff. It lets you add a line at a time to any number of named text files.
 
@@ -17,6 +17,8 @@ Both of these systems have a quality that I like to call "elegance through stupi
 
 FMP lets you quickly add notes to named buckets of notes. You don't have to set up your buckets ahead of time, you can just start using new ones as you need them.
 
+![the quick-append window from the FMP scripts, asking for a line of text.](./fmp.png)
+
 ### What It Is
 
 - A flat folder of plain text files, synced across all your devices.
@@ -27,8 +29,6 @@ FMP lets you quickly add notes to named buckets of notes. You don't have to set 
     - `caret-tag.txt` doesn't need to exist yet. It'll get created when it's needed.
     - When moving lines, replace any occurrences of two slashes surrounded by spaces (`like // this`) with a line break.
 - A _very fast_ way to open any file from the lists folder by name.
-
-![the quick-append window from the FMP scripts, asking for a line of text.](./fmp.png)
 
 ### How to Use It
 
@@ -54,15 +54,15 @@ See also [What's the Deal w/ FMP](./WHY.md#whats-the-deal-w-fmp).
 
 Garbage Book acts like a spiral notebook. Turn to a blank page, do whatever I need to do, turn to a new blank page. If I need a page later, flip backwards until I find it. Tear a page out if I want to move it somewhere else.
 
+![screenshot of a browser view in my editor](./garbage_book.png)
+
 ### What It Is
 
 - A folder of plain text files, synced across all your devices. (You can move older files into subfolders to keep things clean.)
 - A scriptable text editor with a really good folder-browsing view.
-- A script to save the current text buffer to the Garbage Book folder with an auto-generated filename.
+- A script that saves the current text buffer to that folder with an auto-generated filename.
     - Timestamp first (I like `"%Y.%m.%d (%H%M)"`), then the first line of the buffer (truncated if necessary, with any iffy-in-a-filename characters removed).
-- Optionally, a global hotkey to open the folder in your editor's browser view.
-
-![screenshot of a browser view in my editor](./garbage_book.png)
+- Optionally, a global hotkey to open that folder in your editor's browser view.
 
 ### How to Use It
 
@@ -80,9 +80,9 @@ See also [What's the Deal w/ Garbage Book](./WHY.md#whats-the-deal-w-garbage-boo
 
 ## Installation
 
-**You'll want to build your own versions of these anyway!** I built FMP and Garbage Book with apps I was already using and a handful of scripts, and replaced a bunch of parts over the years; the whole point was to keep using what I already liked, and I assume you'll want to do the same.
+**You'll want to build your own versions of these anyway!** I slapped these together with apps I was already using and a handful of scripts; the whole point was to keep using what I already liked, and I assume you'll want to do the same.
 
-The scripts in this repo are mostly presented as a source of ideas, a starting point; I don't suppose anyone will use my exact setup. _That said,_ here's how to get that exact setup working.
+I'm posting these scripts as a reference and a starting point; I don't suppose anyone will use my exact setup. _That said,_ here's how to get that exact setup working.
 
 First, check out a local copy of this repo.
 

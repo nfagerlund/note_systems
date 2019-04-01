@@ -20,15 +20,15 @@ Well, tbh there used to be a file on my desktop that I kept all my crap in, and 
 
 I can't remember where I set objects down, and I learned to compensate by predicting where my future self will try to look for something and just setting it down _there._ This is all the way ass-backwards, but it _does_ actually work (whereas remembering doesn't).
 
-I wasn't thinking about that when I made FMP, but I'm pretty sure I'm using it the exact same way — just guess which text file I'll check first for something, and put it in _that_ file. And if that's _not_ how you've been avoiding disaster for three decades plus, FMP probably sounds like fucking chaos and it's giving you anxiety just reading about it.
+I wasn't thinking about that when I made FMP, but I'm pretty sure I'm using it the exact same way — just guess which text file I'll check first, and put it _there._ (And if that's _not_ how you've been avoiding disaster for three decades plus, FMP probably sounds like fucking chaos and it's giving you anxiety just reading about it.)
 
-BTW, I think that finally explains why it's so important to create files implicitly when I append to one that doesn't exist yet!! Since I'm choosing files from the perspective of my future self, I'm thinking of them as already present, and having to explicitly create the file always felt like someone was trolling me by asking me to repeat myself (when really they heard me just fine the first time). I always _knew_ that was the most important part of the whole thing, but had no idea why I was so fixated on it. Live and learn.
+BTW, I think that finally explains why it's so important to silently create files when I use a new ^caret-tag!! Since I'm thinking like my future self, I'm expecting those files to already exist, and having to explicitly create them always felt like having to repeat myself when everyone heard me just fine the first time. (I always considered that the most important part of the whole thing, but never knew why I was so fixated on it. Live and learn.)
 
 ### The Dump File and the Refresh Script
 
 It's probably smarter to have your append script write directly to the caret-tag files instead of the dump file, and then you never actually need the refresh script. So I eventually made some "direct append" scripts that do exactly that ([Mac](./fmp/FMP%20-%20Direct%20append.applescript.js), [iOS](./fmp/Append%20to%20%5Efile.shortcut.plist)).
 
-The thing is, I originally built FMP the way I did because I was lazy and bad at scripting, but then it turned out that I really liked a couple features of the stupid way:
+But even though the original design came from being lazy and bad at scripting, it turns out I really like a couple things about it:
 
 - I can open the dump file and add a whole bunch of unrelated notes in a row.
 - It's easy to go back and tag a bunch of orphaned notes in the dump file later, if I suddenly think of a good place for them.
@@ -36,7 +36,7 @@ The thing is, I originally built FMP the way I did because I was lazy and bad at
 
 ### Cowpaths
 
-I pretty much got FMP's design exactly how I wanted it on the first try, and mostly haven't changed how it works — the only real addition in 13 years was that `first line // second line` trick, where a double slash turns into a line break. I just found myself already doing it all the time — I'd want to put two things in the didread file but was too lazy to open the append field twice, so I'd just leave some slashes to remind me later where the break was supposed to go.
+For the most part, I got FMP's design exactly how I wanted it on the first try and then left it alone. The only real addition in 13 years was that `first line // second line` trick for line breaks. I just found myself already doing it all the time — I'd want to put two things in the didread file but was too lazy to open the append field twice, so I'd leave some slashes to remind me later where the break was supposed to go.
 
 Come to think of it, that's how the ^caret-tags started, too — I started using them to remember context for otherwise cryptic notes in my dump file long before I had any way to sift them out. Then eventually I got frustrated by how bullshit it was to sort them out by hand, and here we are.
 
