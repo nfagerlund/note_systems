@@ -73,6 +73,8 @@ When you need to go back to something you were working on, open the Garbage Book
 
 When you need to do something else with a page (move it into a Git repo, email it to someone, etc.), just drag it to wherever, maybe rename it, your call.
 
+### wtf?
+
 See also [What's the Deal w/ Garbage Book](./WHY.md#whats-the-deal-w-garbage-book).
 
 -----
